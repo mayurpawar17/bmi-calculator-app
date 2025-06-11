@@ -1,3 +1,4 @@
+import 'package:bmi_calculator_app/screens/result_screen.dart';
 import 'package:bmi_calculator_app/widgets/child_card.dart';
 import 'package:bmi_calculator_app/widgets/custom_button.dart';
 import 'package:bmi_calculator_app/widgets/custom_card.dart';
@@ -85,7 +86,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          CustomButton(color: HexColor(buttonColor), buttonText: 'Calculate'),
+          CustomButton(
+            color: HexColor(buttonColor),
+            buttonText: 'Calculate',
+            ontap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ResultScreen()),
+              );
+            },
+          ),
         ],
       ),
     );

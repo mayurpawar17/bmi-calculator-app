@@ -1,7 +1,8 @@
+import 'package:bmi_calculator_app/screens/input_page.dart';
+import 'package:bmi_calculator_app/screens/result_screen.dart';
+import 'package:bmi_calculator_app/widgets/bmi_gauge_range.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
-import 'input_page.dart';
 
 const primaryColor = '#101010';
 

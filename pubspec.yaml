@@ -37,6 +37,7 @@ dependencies:
   hexcolor: ^3.0.1
   flutter_font_icons: ^2.2.7
   google_fonts: ^6.2.1
+  syncfusion_flutter_gauges: ^24.1.41
 
 dev_dependencies:
   flutter_test:
