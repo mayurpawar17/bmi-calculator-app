@@ -1,8 +1,13 @@
-import 'package:bmi_calculator_app/reusable_card.dart';
+import 'package:bmi_calculator_app/widgets/child_card.dart';
+import 'package:bmi_calculator_app/widgets/custom_button.dart';
+import 'package:bmi_calculator_app/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-const bottomContainerHeight=80.0;
+const primaryColor = '#101010';
+const secondaryColor = '#3D3D3D';
+const buttonColor = '#7B62FF';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -12,40 +17,48 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("BMI Calculator")),
-        backgroundColor: HexColor('#F4F3FF'),
+        title: Center(
+          child: Text("BMI Calculator", style: TextStyle(color: Colors.white)),
+        ),
+        backgroundColor: HexColor(primaryColor),
       ),
       body: Column(
         children: [
           Expanded(
             child: Row(
               children: [
-                Expanded(child: ReusableCard(color: HexColor('#6d63ff'))),
-                Expanded(child: ReusableCard(color: HexColor('#6d63ff'))),
+                Expanded(
+                  child: ReusableCard(
+                    color: HexColor(secondaryColor),
+                    childCard: ChildCard(cardText: 'MALE', icon: Ionicons.male),
+                  ),
+                ),
+                Expanded(
+                  child: ReusableCard(
+                    color: HexColor(secondaryColor),
+                    childCard: ChildCard(
+                      cardText: 'FEMALE',
+                      icon: Ionicons.female,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          Expanded(child: ReusableCard(color: HexColor('#6d63ff'))),
+          Expanded(child: ReusableCard(color: HexColor(secondaryColor))),
           Expanded(
             child: Row(
               children: [
-                Expanded(child: ReusableCard(color: HexColor('#6d63ff'))),
-                Expanded(child: ReusableCard(color: HexColor('#6d63ff'))),
+                Expanded(child: ReusableCard(color: HexColor(secondaryColor))),
+                // Expanded(child: ReusableCard(color: HexColor(secondaryColor))),
               ],
             ),
           ),
-          Container(
-            color: Colors.deepPurple,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height:bottomContainerHeight  ,
-          ),
+          CustomButton(color: HexColor(buttonColor), buttonText: 'Calculate'),
         ],
       ),
     );
