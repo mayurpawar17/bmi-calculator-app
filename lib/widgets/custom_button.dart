@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const buttonColor = '#7B62FF';
 const containerHeight = 80.0;
@@ -24,7 +25,14 @@ class CustomButton extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(buttonText, style: TextStyle(fontSize: 18, color: Colors.white)),
+          Text(
+            buttonText,
+            style: GoogleFonts.montserrat(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ],
       ),
     );
