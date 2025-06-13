@@ -17,7 +17,7 @@ class ChildCard extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             cardText,
-            style: GoogleFonts.montserrat(fontSize: 20, color: Colors.white),
+            style: GoogleFonts.montserrat(fontSize: 16, color: Colors.white),
           ),
         ],
       ),
