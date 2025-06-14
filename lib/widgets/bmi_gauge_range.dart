@@ -3,9 +3,14 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import '../screens/input_page.dart';
+
+const activeCardColor2 = Color(0xff3240A1);
+
 class BMIGaugeRange extends StatelessWidget {
   final double bmi;
-  const BMIGaugeRange({super.key, required this.bmi});
+  final Gender? gender;
+  const BMIGaugeRange({super.key, required this.bmi, required this.gender});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +70,13 @@ class BMIGaugeRange extends StatelessWidget {
             WidgetPointer(
               value: bmi,
               enableAnimation: true,
-              child: Icon(
-                Foundation.male, // 👈 You can use any icon here
+              child: gender==Gender.male?Icon(
+                Foundation.male,
+                // color: _getBMIColor(bmi),
+                color: Colors.white,
+                size: 36,
+              ):Icon(
+                Foundation.female,
                 // color: _getBMIColor(bmi),
                 color: Colors.white,
                 size: 36,
@@ -86,13 +96,13 @@ class BMIGaugeRange extends StatelessWidget {
                       color: _getBMIColor(bmi),
                     ),
                   ),
-                  Text(
-                    'kg/m²',
-                    style: GoogleFonts.montserrat(
-                      color: Colors.white70,
-                      fontSize: 16,
-                    ),
-                  ),
+                  // Text(
+                  //   'kg/m²',
+                  //   style: GoogleFonts.montserrat(
+                  //     color: Colors.white70,
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                 ],
               ),
               angle: 90,

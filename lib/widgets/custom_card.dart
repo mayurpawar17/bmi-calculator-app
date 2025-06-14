@@ -24,7 +24,7 @@ class CustomCard extends StatelessWidget {
         child: childCard,
         height: height,
         width: width,
-        margin: EdgeInsets.all(15.0),
+        margin: EdgeInsets.all(13.0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(10),

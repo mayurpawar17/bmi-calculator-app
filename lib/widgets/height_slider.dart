@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 const activeCardColor2 = Color(0xff3240A1);
 
 class HeightSliderScreen extends StatefulWidget {
-  const HeightSliderScreen({super.key});
+  const HeightSliderScreen({super.key, required this.onSliderHeightSelected});
+
+  final Function(int) onSliderHeightSelected;
+
 
   @override
   _HeightSliderScreenState createState() => _HeightSliderScreenState();
@@ -30,11 +33,13 @@ class _HeightSliderScreenState extends State<HeightSliderScreen> {
             // Popup label
             onChanged: (value) {
               setState(() => _height = value);
+
+              widget.onSliderHeightSelected(_height.round());
             },
             activeColor: activeCardColor2,
             inactiveColor: Colors.grey[300],
           ),
-          Text('${_height.round()} cm' ,style: TextStyle(color: Colors.white),)
+          Text('${_height.round()} cm', style: TextStyle(color: Colors.white,fontSize: 18)),
         ],
       ),
     );

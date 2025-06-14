@@ -2,20 +2,18 @@ import 'package:bmi_calculator_app/screens/result_screen.dart';
 import 'package:bmi_calculator_app/widgets/child_card.dart';
 import 'package:bmi_calculator_app/widgets/custom_button.dart';
 import 'package:bmi_calculator_app/widgets/custom_card.dart';
-import 'package:bmi_calculator_app/widgets/switch_widget.dart';
+import 'package:bmi_calculator_app/widgets/weightPicker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/height_slider.dart';
+import '../widgets/heightUnitSwitch_widget.dart';
 
 enum Gender { male, female }
 
 const primaryColor = Color(0xff101010);
 const secondaryColor = Color(0xff1E1E1E);
-const buttonColor = Color(0xff7B62FF);
-const activeCardColor = Color(0xff7B62FF);
-const activeCardColor2 = Color(0xff3240A1);
+const accentBlueDarkColor = Color(0xff3240A1);
 const inactiveCardColor = Color(0xff1E1E1E);
 
 class InputPage extends StatefulWidget {
@@ -27,18 +25,39 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? gender;
+  double bmi = 0.0;
+  int selectedWeight = 25;
+  int selectedHeight = 170;
+
+  void handleWeightChange(int weight) {
+    setState(() {
+      selectedWeight = weight;
+    });
+  }
+
+  void handleHeightChange(int height) {
+    setState(() {
+      selectedHeight = height;
+    });
+  }
+
+  void calculateBmi() {
+    double height;
+    setState(() {
+      height = selectedHeight / 100;
+      bmi = selectedWeight / (height * height);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            "BMI Calculator",
-            style: GoogleFonts.montserrat(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
+        title: Text(
+          "BMI Calculator",
+          style: GoogleFonts.montserrat(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
         ),
         backgroundColor: primaryColor,
@@ -57,7 +76,7 @@ class _InputPageState extends State<InputPage> {
                     },
                     color:
                         gender == Gender.male
-                            ? activeCardColor2
+                            ? accentBlueDarkColor
                             : inactiveCardColor,
                     childCard: ChildCard(
                       cardText: 'MALE',
@@ -74,7 +93,7 @@ class _InputPageState extends State<InputPage> {
                     },
                     color:
                         gender == Gender.female
-                            ? activeCardColor2
+                            ? accentBlueDarkColor
                             : inactiveCardColor,
                     childCard: ChildCard(
                       cardText: 'FEMALE',
@@ -94,9 +113,17 @@ class _InputPageState extends State<InputPage> {
                     childCard: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('Height', style: TextStyle(color: Colors.white)),
-                        HeightUnitSwitch(),
-                        HeightSliderScreen(),
+                        Text(
+                          'Height',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        HeightUnitSwitch(onHeightReceived: handleHeightChange),
+                        // HeightSliderScreen(),
+                        // HeightPickerPage(),
                       ],
                     ),
                   ),
@@ -113,8 +140,15 @@ class _InputPageState extends State<InputPage> {
                     childCard: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('Weight', style: TextStyle(color: Colors.white)),
-                       HeightSliderScreen()
+                        Text(
+                          'Weight',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        WeightPickerPage(onWeightSelected: handleWeightChange),
                       ],
                     ),
                   ),
@@ -124,13 +158,21 @@ class _InputPageState extends State<InputPage> {
           ),
           CustomButton(
             // color: buttonColor,
-            color: activeCardColor2,
+            color: accentBlueDarkColor,
             buttonText: 'Calculate',
             ontap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ResultScreen()),
-              );
+              calculateBmi();
+              gender == Gender.male || gender == Gender.female
+                  ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => ResultScreen(bmi: bmi, gender: gender),
+                    ),
+                  )
+                  : ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Please select Gender!!!')),
+                  );
             },
           ),
         ],

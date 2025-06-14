@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ChildCard extends StatelessWidget {
   const ChildCard({super.key, this.icon, this.cardText});
@@ -17,7 +16,7 @@ class ChildCard extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             cardText,
-            style: GoogleFonts.montserrat(fontSize: 16, color: Colors.white),
+            style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.w500),
           ),
         ],
       ),
