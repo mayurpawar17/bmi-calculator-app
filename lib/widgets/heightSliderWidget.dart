@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 
 const activeCardColor2 = Color(0xff3240A1);
 
-class HeightSliderScreen extends StatefulWidget {
-  const HeightSliderScreen({super.key, required this.onSliderHeightSelected});
+class HeightSliderWidget extends StatefulWidget {
+  const HeightSliderWidget({super.key, required this.onSliderHeightSelected});
 
   final Function(int) onSliderHeightSelected;
 
-
   @override
-  _HeightSliderScreenState createState() => _HeightSliderScreenState();
+  _HeightSliderWidgetState createState() => _HeightSliderWidgetState();
 }
 
-class _HeightSliderScreenState extends State<HeightSliderScreen> {
+class _HeightSliderWidgetState extends State<HeightSliderWidget> {
   double _height = 170.0; // Default height in cm
 
   @override
@@ -39,7 +38,10 @@ class _HeightSliderScreenState extends State<HeightSliderScreen> {
             activeColor: activeCardColor2,
             inactiveColor: Colors.grey[300],
           ),
-          Text('${_height.round()} cm', style: TextStyle(color: Colors.white,fontSize: 18)),
+          Text(
+            '${_height.round()} cm',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
         ],
       ),
     );

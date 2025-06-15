@@ -6,25 +6,25 @@ class CustomCard extends StatelessWidget {
     this.height,
     this.width,
     required this.color,
-    this.childCard,
-    this.ontap,
+    this.child,
+    this.onTap,
   });
 
-  final height;
-  final width;
-  final color;
-  final childCard;
-  final ontap;
+  final double? height;
+  final double? width;
+  final Color color; // Consider making this nullable (Color?) if needed
+  final Widget? child;
+  final VoidCallback? onTap; // More specific type than dynamic
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Container(
-        child: childCard,
+        child: child,
         height: height,
         width: width,
-        margin: EdgeInsets.all(13.0),
+        margin: const EdgeInsets.all(13.0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(10),

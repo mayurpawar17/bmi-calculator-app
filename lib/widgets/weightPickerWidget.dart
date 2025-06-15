@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class WeightPickerPage extends StatefulWidget {
-  const WeightPickerPage({super.key, required this.onWeightSelected});
+class WeightPickerWidget extends StatefulWidget {
+  const WeightPickerWidget({super.key, required this.onWeightSelected});
 
   final Function(int) onWeightSelected; // callback
   @override
-  WeightPickerPageState createState() => WeightPickerPageState();
+  WeightPickerWidgetState createState() => WeightPickerWidgetState();
 }
 
-class WeightPickerPageState extends State<WeightPickerPage> {
+class WeightPickerWidgetState extends State<WeightPickerWidget> {
   int selectedWeight = 25;
 
   @override
@@ -32,7 +32,7 @@ class WeightPickerPageState extends State<WeightPickerPage> {
               });
               widget.onWeightSelected(selectedWeight); // notify parent
             },
-            children: List<Widget>.generate(100, (index) {
+            children: List<Widget>.generate(200, (index) {
               return Center(
                 child: Text(
                   '${index + 10}',

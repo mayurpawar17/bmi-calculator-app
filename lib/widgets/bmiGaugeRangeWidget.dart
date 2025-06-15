@@ -3,14 +3,20 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-import '../screens/input_page.dart';
-
-const activeCardColor2 = Color(0xff3240A1);
+import '../screens/inputScreen.dart';
 
 class BMIGaugeRange extends StatelessWidget {
-  final double bmi;
-  final Gender? gender;
   const BMIGaugeRange({super.key, required this.bmi, required this.gender});
+
+  final double bmi;
+  final Gender gender; // Non-nullable (or use `Gender?` with fallback)
+
+  // Constants
+  static const double _gaugeThickness = 0.2;
+  static const double _pointerSize = 36;
+  static const double _bmiTextSize = 34;
+  static const double _radiusFactor = 0.9;
+  static const double _annotationPosFactor = 0.1;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +31,9 @@ class BMIGaugeRange extends StatelessWidget {
           endAngle: 0,
           showTicks: false,
           showLabels: false,
-          radiusFactor: 0.9,
+          radiusFactor: _radiusFactor,
           axisLineStyle: AxisLineStyle(
-            thickness: 0.2,
+            thickness: _gaugeThickness,
             thicknessUnit: GaugeSizeUnit.factor,
             cornerStyle: CornerStyle.bothCurve,
             color: Colors.grey.shade800,
@@ -37,32 +43,32 @@ class BMIGaugeRange extends StatelessWidget {
               startValue: 10,
               endValue: 18.5,
               color: Colors.yellow.shade600,
-              startWidth: 0.2,
-              endWidth: 0.2,
+              startWidth: _gaugeThickness,
+              endWidth: _gaugeThickness,
               sizeUnit: GaugeSizeUnit.factor,
             ),
             GaugeRange(
               startValue: 18.5,
               endValue: 24.9,
               color: Colors.green,
-              startWidth: 0.2,
-              endWidth: 0.2,
+              startWidth: _gaugeThickness,
+              endWidth: _gaugeThickness,
               sizeUnit: GaugeSizeUnit.factor,
             ),
             GaugeRange(
               startValue: 24.9,
               endValue: 29.9,
               color: Colors.orange,
-              startWidth: 0.2,
-              endWidth: 0.2,
+              startWidth: _gaugeThickness,
+              endWidth: _gaugeThickness,
               sizeUnit: GaugeSizeUnit.factor,
             ),
             GaugeRange(
               startValue: 29.9,
               endValue: 40,
               color: Colors.red,
-              startWidth: 0.2,
-              endWidth: 0.2,
+              startWidth: _gaugeThickness,
+              endWidth: _gaugeThickness,
               sizeUnit: GaugeSizeUnit.factor,
             ),
           ],
@@ -70,16 +76,10 @@ class BMIGaugeRange extends StatelessWidget {
             WidgetPointer(
               value: bmi,
               enableAnimation: true,
-              child: gender==Gender.male?Icon(
-                Foundation.male,
-                // color: _getBMIColor(bmi),
-                color: Colors.white,
-                size: 36,
-              ):Icon(
-                Foundation.female,
-                // color: _getBMIColor(bmi),
-                color: Colors.white,
-                size: 36,
+              child: Icon(
+                gender == Gender.male ? Foundation.male : Foundation.female,
+                color: Colors.white, // Dynamic color
+                size: _pointerSize,
               ),
             ),
           ],
@@ -91,22 +91,19 @@ class BMIGaugeRange extends StatelessWidget {
                   Text(
                     bmi.toStringAsFixed(1),
                     style: GoogleFonts.montserrat(
-                      fontSize: 34,
+                      fontSize: _bmiTextSize,
                       fontWeight: FontWeight.bold,
                       color: _getBMIColor(bmi),
                     ),
                   ),
-                  // Text(
-                  //   'kg/m²',
-                  //   style: GoogleFonts.montserrat(
-                  //     color: Colors.white70,
-                  //     fontSize: 16,
-                  //   ),
-                  // ),
+                  const Text(
+                    'kg/m²',
+                    style: TextStyle(color: Colors.white70, fontSize: 16),
+                  ),
                 ],
               ),
               angle: 90,
-              positionFactor: 0.1,
+              positionFactor: _annotationPosFactor,
             ),
           ],
         ),
@@ -115,7 +112,7 @@ class BMIGaugeRange extends StatelessWidget {
   }
 
   Color _getBMIColor(double bmi) {
-    if (bmi < 18.5) return Colors.yellow;
+    if (bmi < 18.5) return Colors.yellow.shade600;
     if (bmi < 24.9) return Colors.green;
     if (bmi < 29.9) return Colors.orange;
     return Colors.red;

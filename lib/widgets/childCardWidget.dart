@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ChildCard extends StatelessWidget {
-  const ChildCard({super.key, this.icon, this.cardText});
+  const ChildCard({
+    super.key,
+    this.icon,
+    this.cardText,
+    required bool isActive,
+  });
 
   final icon;
   final cardText;
@@ -16,7 +21,11 @@ class ChildCard extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             cardText,
-            style: TextStyle(fontSize: 18, color: Colors.white,fontWeight: FontWeight.w500),
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
