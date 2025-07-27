@@ -1,16 +1,52 @@
-# bmi_calculator_app
+# 💪 BMI FitIndex Pro
 
-A new Flutter project.
+BMI FitIndex Pro is a sleek and powerful Flutter app designed to help users monitor their **Body Mass Index (BMI)** and track their fitness journey with ease. Whether you're a beginner or a fitness enthusiast, this app provides instant feedback on your health index based on your height and weight inputs.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 📱 Clean and intuitive UI
+- 📊 Instant BMI Calculation
+- 📈 Real-time Results with Suggestions
+- 🌗 Light & Dark Mode Support
+- ⚡️ Fast and Responsive
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🖼️ Screenshots
+
+<table>
+  <tr>
+    <td><img src="https://github.com/mayurpawar17/bmi-calculator-app/blob/main/projectDetails/BMI%20FitIndex%20Pro%20(6).jpg" width="200"/></td>
+    <td><img src="assets/screenshots/screen2.png" width="200"/></td>
+    <td><img src="assets/screenshots/screen3.png" width="200"/></td>
+    <td><img src="assets/screenshots/screen4.png" width="200"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>🏠 Home Screen</b></td>
+    <td align="center"><b>🧮 Input Screen</b></td>
+    <td align="center"><b>📉 Result Screen</b></td>
+    <td align="center"><b>⚙️ Settings Screen</b></td>
+  </tr>
+</table>
+
+
+---
+
+## 🔧 Tech Stack
+
+- **Flutter** (Dart)
+- **Provider** (State Management)
+- **Material Design 3**
+- **Custom Widgets**
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com//bmi-fitindex-pro.git
+cd bmi-fitindex-pro
+flutter pub get
+flutter run
