@@ -90,53 +90,55 @@ class _InputScreenState extends State<InputScreen> {
         backgroundColor: primaryColor,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          // Gender Selection Row
-          Expanded(
-            child: Row(
-              children: [
-                _buildGenderCard(
-                  context,
-                  gender: Gender.male,
-                  label: 'MALE',
-                  icon: Foundation.male,
-                ),
-                _buildGenderCard(
-                  context,
-                  gender: Gender.female,
-                  label: 'FEMALE',
-                  icon: Foundation.female,
-                ),
-              ],
-            ),
-          ),
-
-          // Height Selection
-          Expanded(
-            child: _buildInputCard(
-              title: 'Height',
-              child: HeightUnitSwitchWidget(
-                onHeightReceived: handleHeightChange,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Gender Selection Row
+            Expanded(
+              child: Row(
+                children: [
+                  _buildGenderCard(
+                    context,
+                    gender: Gender.male,
+                    label: 'MALE',
+                    icon: Foundation.male,
+                  ),
+                  _buildGenderCard(
+                    context,
+                    gender: Gender.female,
+                    label: 'FEMALE',
+                    icon: Foundation.female,
+                  ),
+                ],
               ),
             ),
-          ),
-
-          // Weight Selection
-          Expanded(
-            child: _buildInputCard(
-              title: 'Weight',
-              child: WeightPickerWidget(onWeightSelected: handleWeightChange),
+        
+            // Height Selection
+            Expanded(
+              child: _buildInputCard(
+                title: 'Height',
+                child: HeightUnitSwitchWidget(
+                  onHeightReceived: handleHeightChange,
+                ),
+              ),
             ),
-          ),
-
-          // Calculate Button
-          CustomButton(
-            color: accentBlueDarkColor,
-            buttonText: 'Calculate',
-            onTap: () => _navigateToResults(context),
-          ),
-        ],
+        
+            // Weight Selection
+            Expanded(
+              child: _buildInputCard(
+                title: 'Weight',
+                child: WeightPickerWidget(onWeightSelected: handleWeightChange),
+              ),
+            ),
+        
+            // Calculate Button
+            CustomButton(
+              color: accentBlueDarkColor,
+              buttonText: 'Calculate',
+              onTap: () => _navigateToResults(context),
+            ),
+          ],
+        ),
       ),
     );
   }
