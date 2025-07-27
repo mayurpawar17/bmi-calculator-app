@@ -18,16 +18,18 @@ BMI FitIndex Pro is a sleek and powerful Flutter app designed to help users moni
 
 <table>
   <tr>
+        <td><img src="https://github.com/mayurpawar17/bmi-calculator-app/blob/main/projectDetails/BMI%20FitIndex%20Pro%20(1).jpg" width="200"/></td>
     <td><img src="https://github.com/mayurpawar17/bmi-calculator-app/blob/main/projectDetails/BMI%20FitIndex%20Pro%20(6).jpg" width="200"/></td>
-    <td><img src="assets/screenshots/screen2.png" width="200"/></td>
-    <td><img src="assets/screenshots/screen3.png" width="200"/></td>
-    <td><img src="assets/screenshots/screen4.png" width="200"/></td>
+    <td><img src="https://github.com/mayurpawar17/bmi-calculator-app/blob/main/projectDetails/BMI%20FitIndex%20Pro%20(2).jpg" width="200"/></td>
+    <td><img src="https://github.com/mayurpawar17/bmi-calculator-app/blob/main/projectDetails/BMI%20FitIndex%20Pro%20(3).jpg" width="200"/></td>
+ 
   </tr>
   <tr>
+      <td align="center"><b>🚀 Splash Screen</b></td>
     <td align="center"><b>🏠 Home Screen</b></td>
     <td align="center"><b>🧮 Input Screen</b></td>
     <td align="center"><b>📉 Result Screen</b></td>
-    <td align="center"><b>⚙️ Settings Screen</b></td>
+   
   </tr>
 </table>
 
