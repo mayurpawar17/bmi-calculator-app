@@ -41,68 +41,70 @@ class ResultScreen extends StatelessWidget {
         ),
         backgroundColor: primaryColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Hero(
-              tag: 'range_$bmi', // Unique tag
-              child: BMIGaugeRange(bmi: bmi, gender: gender),
-            ),
-            RichText(
-              text: TextSpan(
-                text: 'Your BMI is ',
-                style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontSize: 22,
-                ),
-                children: [
-                  TextSpan(
-                    text: ' ${_yourCategory(bmi)}',
-                    style: GoogleFonts.montserrat(
-                      color: _getBMIColor(bmi),
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Hero(
+                tag: 'range_$bmi', // Unique tag
+                child: BMIGaugeRange(bmi: bmi, gender: gender),
+              ),
+              RichText(
+                text: TextSpan(
+                  text: 'Your BMI is ',
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 22,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' ${_yourCategory(bmi)}',
+                      style: GoogleFonts.montserrat(
+                        color: _getBMIColor(bmi),
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  const SizedBox(height: 10),
+                  CategoryCard(
+                    categoryText: 'Underweight',
+                    rangeText: 'Below 18.5',
+                    color: Colors.yellow,
+                  ),
+                  const SizedBox(height: 10),
+                  CategoryCard(
+                    categoryText: 'Normal',
+                    rangeText: '18.5 to 24.9',
+                    color: Colors.green,
+                  ),
+                  const SizedBox(height: 10),
+                  CategoryCard(
+                    categoryText: 'Overweight',
+                    rangeText: '24.9 to 29.9',
+                    color: Colors.orange,
+                  ),
+                  const SizedBox(height: 10),
+                  CategoryCard(
+                    categoryText: 'Obesity',
+                    rangeText: '30 or greater',
+                    color: Colors.red,
                   ),
                 ],
               ),
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 10),
-                CategoryCard(
-                  categoryText: 'Underweight',
-                  rangeText: 'Below 18.5',
-                  color: Colors.yellow,
-                ),
-                const SizedBox(height: 10),
-                CategoryCard(
-                  categoryText: 'Normal',
-                  rangeText: '18.5 to 24.9',
-                  color: Colors.green,
-                ),
-                const SizedBox(height: 10),
-                CategoryCard(
-                  categoryText: 'Overweight',
-                  rangeText: '24.9 to 29.9',
-                  color: Colors.orange,
-                ),
-                const SizedBox(height: 10),
-                CategoryCard(
-                  categoryText: 'Obesity',
-                  rangeText: '30 or greater',
-                  color: Colors.red,
-                ),
-              ],
-            ),
-            CustomButton(
-              buttonText: 'Edit Information',
-              color: activeCardColor2,
-              onTap: () => Navigator.pop(context),
-            ),
-          ],
+              CustomButton(
+                buttonText: 'Edit Information',
+                color: activeCardColor2,
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          ),
         ),
       ),
     );
