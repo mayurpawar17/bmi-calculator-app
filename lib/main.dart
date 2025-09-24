@@ -1,4 +1,5 @@
 import 'package:bmi_calculator_app/screens/inputScreen.dart';
+import 'package:bmi_calculator_app/screens2/bmi_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,10 +15,10 @@ class BMICalculator extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: primaryColor,
-        textTheme: GoogleFonts.montserratTextTheme(),
+        textTheme: GoogleFonts.openSansTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
-      home: InputScreen(),
+      home: BMICalculatorScreen(),
     );
   }
 }
