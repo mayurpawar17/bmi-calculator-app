@@ -1,33 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bmi_calculator_app/widgets2/custom_cupertino_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../utils/app_colors.dart';
 import 'height_switch.dart';
 
-class CustomHeightCard extends StatefulWidget {
+class CustomHeightCard extends StatelessWidget {
   const CustomHeightCard({super.key});
-
-  @override
-  State<CustomHeightCard> createState() => _CustomHeightCardState();
-}
-
-class _CustomHeightCardState extends State<CustomHeightCard> {
-  int _selectedIndex = 0;
-  final List<int> _items = [
-    150,
-    155,
-    160,
-    163, // Approx. average female height in some regions
-    165,
-    170,
-    175,
-    177, // Approx. average male height in some regions
-    180,
-    183,
-    185,
-    190,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +22,11 @@ class _CustomHeightCardState extends State<CustomHeightCard> {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.024),
-            // Shadow color with some transparency
             spreadRadius: 1,
-            // How far the shadow spreads
             blurRadius: 20,
-            // How blurry the shadow is
-            offset: Offset(0, 5), // Changes position of shadow (x, y)
+            offset: Offset(0, 5),
           ),
-          // You can add multiple BoxShadows for more complex effects
-          // For example, a very subtle, wider shadow underneath
+
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             spreadRadius: 5,
@@ -62,7 +36,7 @@ class _CustomHeightCardState extends State<CustomHeightCard> {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -76,37 +50,9 @@ class _CustomHeightCardState extends State<CustomHeightCard> {
             ],
           ),
           Row(
-            children: [
-              SizedBox(
-                height: 100,
-                width: 140,
-                child: CupertinoPicker(
-                  itemExtent: 35.0,
-                  onSelectedItemChanged: (int newIndex) {
-                    setState(() {
-                      _selectedIndex = newIndex;
-                    });
-
-                    // --- Trigger Haptic Feedback ---
-                    HapticFeedback.selectionClick();
-                  },
-                  magnification: 1.22,
-                  squeeze: 1.2,
-                  useMagnifier: true,
-                  looping: false,
-                  children:
-                      _items.map((int item) {
-                        return Center(
-                          child: Text(
-                            '${item}',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        );
-                      }).toList(),
-                ),
-              ),
-              Text('Ft', style: TextStyle(fontWeight: FontWeight.w700)),
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [CustomCupertinoPicker(), CustomCupertinoPicker()],
           ),
 
           Text(
