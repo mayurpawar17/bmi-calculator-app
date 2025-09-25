@@ -1,5 +1,6 @@
 import 'package:bmi_calculator_app/bloc/bmi_bloc.dart';
 import 'package:bmi_calculator_app/bloc/bmi_state.dart';
+import 'package:bmi_calculator_app/screens2/settings_screen.dart';
 import 'package:bmi_calculator_app/widgets2/custom_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +28,16 @@ class BMICalculatorScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor2,
 
         elevation: 0.0,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sunny))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+            },
+            icon: Icon(Icons.settings),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -64,11 +74,11 @@ class BMICalculatorScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 25),
 
                     //Height section
                     CustomHeightCard(),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 25),
                     //Weight section
                     CustomWeightCard(),
 
@@ -83,7 +93,7 @@ class BMICalculatorScreen extends StatelessWidget {
                     //   controller: _weightController,
                     //   decoration: InputDecoration(hintText: 'weight'),
                     // ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 25),
 
                     CustomButton2(
                       text: 'Calculate BMI',

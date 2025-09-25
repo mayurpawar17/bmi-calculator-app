@@ -21,6 +21,7 @@ class BMICalculator extends StatelessWidget {
           scaffoldBackgroundColor: primaryColor,
           textTheme: GoogleFonts.openSansTextTheme(),
         ),
+
         debugShowCheckedModeBanner: false,
         home: BMICalculatorScreen(),
       ),

@@ -9,7 +9,7 @@ class CustomHeightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height * 0.3;
+    final height = MediaQuery.of(context).size.height * 0.28;
 
     return Container(
       padding: EdgeInsets.all(15),
@@ -39,7 +39,7 @@ class CustomHeightCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
                 'Height',
@@ -50,8 +50,8 @@ class CustomHeightCard extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [CustomCupertinoPicker(), CustomCupertinoPicker()],
           ),
 
