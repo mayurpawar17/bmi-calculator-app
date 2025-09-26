@@ -14,7 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   hexcolor: ^3.0.1
   flutter_font_icons: ^2.2.7
-  google_fonts: ^6.3.1
+  google_fonts: ^6.3.2
   syncfusion_flutter_gauges: ^24.2.9
   url_launcher:
   flutter_bloc: ^9.1.1

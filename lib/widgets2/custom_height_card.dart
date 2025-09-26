@@ -1,11 +1,18 @@
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:bmi_calculator_app/widgets2/custom_cupertino_picker.dart';
+import 'package:bmi_calculator_app/widgets2/custom_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../utils/app_colors.dart';
 import 'height_switch.dart';
 
 class CustomHeightCard extends StatelessWidget {
-  const CustomHeightCard({super.key});
+  CustomHeightCard({super.key});
+
+  final feetList = List.generate(6, (index) => index + 3);
+  final inchList = List.generate(12, (index) => index + 1);
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +56,25 @@ class CustomHeightCard extends StatelessWidget {
               HeightSwitch(),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          BlocBuilder<BmiBloc, BmiState>(
+            builder: (context, state) {
+              return state.isCm
+                  ? CustomSlider(value: 150, onChanged: (v) {})
+                  : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-            children: [CustomCupertinoPicker(), CustomCupertinoPicker()],
+                    children: [
+                      CustomCupertinoPicker(
+                        valueList: feetList,
+                        unitText: 'Ft',
+                      ),
+                      CustomCupertinoPicker(
+                        valueList: inchList,
+                        unitText: 'Inch',
+                      ),
+                    ],
+                  );
+            },
           ),
 
           Text(

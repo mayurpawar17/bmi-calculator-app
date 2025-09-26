@@ -1,17 +1,12 @@
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_event.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HeightSwitch extends StatefulWidget {
+class HeightSwitch extends StatelessWidget {
   const HeightSwitch({super.key});
-
-  // final ValueChanged<int> onHeightReceived;
-
-  @override
-  State<HeightSwitch> createState() => _HeightSwitchState();
-}
-
-class _HeightSwitchState extends State<HeightSwitch> {
-  bool _isCm = true;
 
   // Constants
   static const _activeCardColor = Color(0xff3240A1);
@@ -24,14 +19,7 @@ class _HeightSwitchState extends State<HeightSwitch> {
   );
   static final _switchDecoration = BoxDecoration(
     borderRadius: const BorderRadius.all(Radius.circular(10)),
-    // border: Border.all(color: Colors.black),
-    // color: Colors.blueAccent,
   );
-
-  void _toggleUnit(bool isCm) {
-    HapticFeedback.selectionClick();
-    setState(() => _isCm = isCm);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,57 +27,35 @@ class _HeightSwitchState extends State<HeightSwitch> {
       decoration: _switchDecoration,
       padding: const EdgeInsets.all(2),
 
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildUnitSwitch(
-            label: 'Cm',
-            isActive: _isCm,
-            onTap: () => _toggleUnit(true),
-          ),
-          SizedBox(width: 2),
-          _buildUnitSwitch(
-            label: 'Ft',
-            isActive: !_isCm,
-            onTap: () => _toggleUnit(false),
-          ),
-        ],
+      child: BlocBuilder<BmiBloc, BmiState>(
+        builder: (context, state) {
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildUnitSwitch(
+                label: 'Cm',
+                isActive: state.isCm,
+                onTap:
+                    () => {
+                      context.read<BmiBloc>().add(HeightUnitToggled(true)),
+                      HapticFeedback.selectionClick(),
+                    },
+              ),
+              SizedBox(width: 2),
+              _buildUnitSwitch(
+                label: 'Ft',
+                isActive: !state.isCm,
+                onTap:
+                    () => {
+                      context.read<BmiBloc>().add(HeightUnitToggled(false)),
+                      HapticFeedback.selectionClick(),
+                    },
+              ),
+            ],
+          );
+        },
       ),
     );
-    // return Column(
-    //   children: [
-    //     // Unit Toggle Switch
-    //     Container(
-    //       decoration: _switchDecoration,
-    //       padding: const EdgeInsets.all(2),
-    //
-    //       child: Row(
-    //         mainAxisSize: MainAxisSize.min,
-    //         children: [
-    //           _buildUnitSwitch(
-    //             label: 'Cm',
-    //             isActive: _isCm,
-    //             onTap: () => _toggleUnit(true),
-    //           ),
-    //           _buildUnitSwitch(
-    //             label: 'Ft',
-    //             isActive: !_isCm,
-    //             onTap: () => _toggleUnit(false),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //
-    //     // const SizedBox(height: 16),
-    //
-    //     // Height Input Widget
-    //     // _isCm
-    //     //     ? HeightSliderWidget(
-    //     //   onSliderHeightSelected: widget.onHeightReceived,
-    //     // )
-    //     //     : HeightPickerWidget(onHeightSelected: widget.onHeightReceived),
-    //   ],
-    // );
   }
 
   Widget _buildUnitSwitch({

@@ -1,12 +1,12 @@
-import 'package:bmi_calculator_app/bloc/bmi_bloc.dart';
-import 'package:bmi_calculator_app/bloc/bmi_state.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:bmi_calculator_app/screens2/settings_screen.dart';
 import 'package:bmi_calculator_app/widgets2/custom_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/bmi_event.dart';
+import '../features/bmiCalculation/presentation/bloc/bmi_event.dart';
 import '../utils/app_colors.dart';
 import '../widgets2/custom_gender_card.dart';
 import '../widgets2/custom_height_card.dart';

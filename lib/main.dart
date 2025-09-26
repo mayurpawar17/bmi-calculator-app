@@ -1,4 +1,4 @@
-import 'package:bmi_calculator_app/bloc/bmi_bloc.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
 import 'package:bmi_calculator_app/screens/inputScreen.dart';
 import 'package:bmi_calculator_app/screens2/bmi_calculator_screen.dart';
 import 'package:flutter/material.dart';

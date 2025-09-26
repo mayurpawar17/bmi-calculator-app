@@ -2,7 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class CustomCupertinoPicker extends StatelessWidget {
-  CustomCupertinoPicker({super.key});
+  CustomCupertinoPicker({
+    super.key,
+    required this.valueList,
+    required this.unitText,
+  });
+
+  final List<int> valueList;
+  final String unitText;
 
   final List<int> _items = [
     150,
@@ -31,10 +38,6 @@ class CustomCupertinoPicker extends StatelessWidget {
           child: CupertinoPicker(
             itemExtent: 35.0,
             onSelectedItemChanged: (int newIndex) {
-              // setState(() {
-              //   _selectedIndex = newIndex;
-              // });
-
               // --- Trigger Haptic Feedback ---
               HapticFeedback.selectionClick();
             },
@@ -43,14 +46,14 @@ class CustomCupertinoPicker extends StatelessWidget {
             useMagnifier: true,
             looping: false,
             children:
-                _items.map((int item) {
+                valueList.map((int item) {
                   return Center(
                     child: Text('${item}', style: TextStyle(fontSize: 14)),
                   );
                 }).toList(),
           ),
         ),
-        Text('Ft', style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(unitText, style: TextStyle(fontWeight: FontWeight.w700)),
       ],
     );
   }

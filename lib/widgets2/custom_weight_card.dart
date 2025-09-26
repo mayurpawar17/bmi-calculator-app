@@ -1,11 +1,17 @@
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:bmi_calculator_app/widgets2/weight_switch.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../utils/app_colors.dart';
 import 'custom_cupertino_picker.dart';
 
 class CustomWeightCard extends StatelessWidget {
-  const CustomWeightCard({super.key});
+  CustomWeightCard({super.key});
+
+  final kgList = List.generate(200, (index) => index + 10);
+  final lbsList = List.generate(420, (index) => index + 22);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +28,10 @@ class CustomWeightCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.024),
-            // Shadow color with some transparency
             spreadRadius: 1,
-            // How far the shadow spreads
             blurRadius: 20,
-            // How blurry the shadow is
             offset: Offset(0, 5), // Changes position of shadow (x, y)
           ),
-          // You can add multiple BoxShadows for more complex effects
-          // For example, a very subtle, wider shadow underneath
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             spreadRadius: 5,
@@ -55,7 +56,25 @@ class CustomWeightCard extends StatelessWidget {
                 WeightSwitch(),
               ],
             ),
-            CustomCupertinoPicker(),
+            BlocBuilder<BmiBloc, BmiState>(
+              builder: (context, state) {
+                return Center(
+                  child: SizedBox(
+                    width: 150, // give it a fixed width
+                    child:
+                        state.isKg
+                            ? CustomCupertinoPicker(
+                              valueList: kgList,
+                              unitText: 'Kg',
+                            )
+                            : CustomCupertinoPicker(
+                              valueList: lbsList,
+                              unitText: 'Lbs',
+                            ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
