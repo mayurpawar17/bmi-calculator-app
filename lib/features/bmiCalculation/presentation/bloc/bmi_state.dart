@@ -19,6 +19,7 @@ class BmiState {
     double? weight,
     bool? isCm,
     bool? isKg,
+    bool? gender,
   }) {
     return BmiState(
       isMale: isMale ?? this.isMale,

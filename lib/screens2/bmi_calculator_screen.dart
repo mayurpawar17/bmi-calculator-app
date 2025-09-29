@@ -1,6 +1,6 @@
 import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
 import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
-import 'package:bmi_calculator_app/screens2/settings_screen.dart';
+import 'package:bmi_calculator_app/features/theme/presentation/settings_screen.dart';
 import 'package:bmi_calculator_app/widgets2/custom_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

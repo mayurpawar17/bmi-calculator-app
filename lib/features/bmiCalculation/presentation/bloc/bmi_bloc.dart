@@ -5,6 +5,9 @@ import 'bmi_state.dart';
 
 class BmiBloc extends Bloc<BmiEvent, BmiState> {
   BmiBloc() : super(const BmiState()) {
+    on<GenderSelected>((event, emit) {
+      emit(state.copyWith(isMale: event.isMale));
+    });
     on<WeightUnitToggled>((event, emit) {
       emit(state.copyWith(isKg: event.isKg));
     });
