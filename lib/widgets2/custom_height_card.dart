@@ -5,7 +5,6 @@ import 'package:bmi_calculator_app/widgets2/custom_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../utils/app_colors.dart';
 import 'height_switch.dart';
 
 class CustomHeightCard extends StatelessWidget {
@@ -23,8 +22,7 @@ class CustomHeightCard extends StatelessWidget {
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.primaryColor2,
-
+        // color: AppColors.primaryColor2,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -48,10 +46,7 @@ class CustomHeightCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                'Height',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-              ),
+              Text('Height', style: TextStyle(fontWeight: FontWeight.w700)),
               SizedBox(width: 10),
               HeightSwitch(),
             ],
@@ -77,10 +72,7 @@ class CustomHeightCard extends StatelessWidget {
             },
           ),
 
-          Text(
-            '5 feet 3 inches (160 cm)',
-            style: TextStyle(fontWeight: FontWeight.w700),
-          ),
+          Text('5 feet 3 inches (160 cm)'),
         ],
       ),
     );

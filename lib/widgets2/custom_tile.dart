@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
-
 class CustomTile extends StatelessWidget {
   const CustomTile({
     super.key,
     required this.iconData,
     required this.text,
-    required this.widget, required this.color,
+    required this.widget,
+    this.color,
   });
   final IconData iconData;
   final String text;
   final Widget widget;
-  final Color color;
+  final color;
 
   @override
   Widget build(BuildContext context) {

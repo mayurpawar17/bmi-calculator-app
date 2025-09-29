@@ -28,7 +28,7 @@ class CustomGenderCard extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          color: AppColors.primaryColor2,
+          // color: AppColors.primaryColor2,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color:
@@ -39,15 +39,11 @@ class CustomGenderCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.024),
-              // Shadow color with some transparency
               spreadRadius: 1,
-              // How far the shadow spreads
               blurRadius: 20,
-              // How blurry the shadow is
               offset: Offset(0, 5), // Changes position of shadow (x, y)
             ),
-            // You can add multiple BoxShadows for more complex effects
-            // For example, a very subtle, wider shadow underneath
+
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
               spreadRadius: 5,
@@ -58,13 +54,7 @@ class CustomGenderCard extends StatelessWidget {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              text,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-            ),
-            Image.asset(asset, height: 100),
-          ],
+          children: [Text(text), Image.asset(asset, height: 100)],
         ),
       ),
     );

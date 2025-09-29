@@ -1,6 +1,6 @@
+import 'package:bmi_calculator_app/core/theme/app_themes.dart';
 import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_event.dart';
 import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_state.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +9,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   ThemeBloc()
     : super(
-        ThemeState(themeData: ThemeData.light(), appTheme: AppTheme.light),
+        ThemeState(themeData: AppThemes.lightTheme, appTheme: AppTheme.light),
       ) {
     on<LoadTheme>(_onLoadTheme);
     on<ToggleTheme>(_onToggleTheme);
@@ -20,9 +20,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     final savedTheme = prefs.getString(themeKey) ?? "light";
 
     if (savedTheme == "dark") {
-      emit(ThemeState(themeData: ThemeData.dark(), appTheme: AppTheme.dark));
+      emit(ThemeState(themeData: AppThemes.darkTheme, appTheme: AppTheme.dark));
     } else {
-      emit(ThemeState(themeData: ThemeData.light(), appTheme: AppTheme.light));
+      emit(
+        ThemeState(themeData: AppThemes.lightTheme, appTheme: AppTheme.light),
+      );
     }
   }
 
@@ -32,12 +34,14 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (event.appTheme == AppTheme.dark) {
-      await prefs.setString(themeKey, "dark");
-      emit(ThemeState(themeData: ThemeData.dark(), appTheme: AppTheme.dark));
-    } else {
+    if (state.appTheme == AppTheme.dark) {
       await prefs.setString(themeKey, "light");
-      emit(ThemeState(themeData: ThemeData.light(), appTheme: AppTheme.light));
+      emit(
+        ThemeState(themeData: AppThemes.lightTheme, appTheme: AppTheme.light),
+      );
+    } else {
+      await prefs.setString(themeKey, "dark");
+      emit(ThemeState(themeData: AppThemes.darkTheme, appTheme: AppTheme.dark));
     }
   }
 }

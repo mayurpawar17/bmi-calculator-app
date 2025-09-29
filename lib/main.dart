@@ -25,11 +25,15 @@ class BMICalculator extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
-        return MaterialApp(
-          theme: state.themeData,
+        return AnimatedTheme(
+          data: state.themeData,
+          duration: const Duration(milliseconds: 200),
+          child: MaterialApp(
+            theme: state.themeData,
 
-          debugShowCheckedModeBanner: false,
-          home: BMICalculatorScreen(),
+            debugShowCheckedModeBanner: false,
+            home: BMICalculatorScreen(),
+          ),
         );
       },
     );

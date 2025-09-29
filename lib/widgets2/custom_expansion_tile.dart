@@ -41,8 +41,8 @@ class CustomExpansionTile extends StatelessWidget {
           ),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           title: Text('Support Me', style: TextStyle(fontSize: 14)),
-          backgroundColor: Colors.white,
 
+          // backgroundColor: Colors.white,
           children: [
             Container(
               padding: const EdgeInsets.all(16.0),

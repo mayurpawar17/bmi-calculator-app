@@ -4,7 +4,6 @@ import 'package:bmi_calculator_app/widgets2/weight_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../utils/app_colors.dart';
 import 'custom_cupertino_picker.dart';
 
 class CustomWeightCard extends StatelessWidget {
@@ -22,8 +21,7 @@ class CustomWeightCard extends StatelessWidget {
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.primaryColor2,
-
+        // color: AppColors.primaryColor2,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -48,10 +46,7 @@ class CustomWeightCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  'Weight',
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-                ),
+                Text('Weight', style: TextStyle(fontWeight: FontWeight.w700)),
 
                 WeightSwitch(),
               ],

@@ -1,4 +1,3 @@
-import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_state.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ThemeEvent extends Equatable {
@@ -6,14 +5,16 @@ abstract class ThemeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class ToggleTheme extends ThemeEvent {
-  final AppTheme appTheme;
+class ToggleTheme extends ThemeEvent {}
 
-  ToggleTheme(this.appTheme);
-
-  @override
-  List<Object?> get props => [appTheme];
-}
+// class ToggleTheme extends ThemeEvent {
+//   final AppTheme appTheme;
+//
+//   ToggleTheme(this.appTheme);
+//
+//   @override
+//   List<Object?> get props => [appTheme];
+// }
 
 class LoadTheme extends ThemeEvent {
   @override

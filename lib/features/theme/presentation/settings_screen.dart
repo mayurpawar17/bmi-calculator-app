@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../utils/app_colors.dart';
 import '../../../widgets2/custom_expansion_tile.dart';
 import '../../../widgets2/custom_tile.dart';
 import 'bloc/theme_bloc.dart';
@@ -18,9 +17,9 @@ class SettingsScreen extends StatelessWidget {
 
     final themeBloc = context.read<ThemeBloc>();
     return Scaffold(
-      backgroundColor: AppColors.primaryColor2,
+      // backgroundColor: AppColors.primaryColor2,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor2,
+        // backgroundColor: AppColors.primaryColor2,
         title: Text('Settings', style: TextStyle(fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
@@ -46,14 +45,15 @@ class SettingsScreen extends StatelessWidget {
                       value: themeBloc.state.appTheme == AppTheme.dark,
                       onChanged: (bool value) {
                         context.read<ThemeBloc>().add(
-                          ToggleTheme(value ? AppTheme.dark : AppTheme.light),
+                          ToggleTheme(),
+                          // ToggleTheme(),
                         );
                       },
-                      activeTrackColor: AppColors.accentBlueDarkColor,
+                      // activeTrackColor: AppColors.accentBlueDarkColor,
                     ),
                   ),
                 ),
-                color: AppColors.primaryColor2,
+                // color: AppColors.primaryColor2,
               ),
               SizedBox(height: 50),
 
