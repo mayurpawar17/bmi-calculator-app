@@ -16,27 +16,34 @@ class CustomWeightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.25;
     final width = MediaQuery.of(context).size.width * 0.5;
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: EdgeInsets.all(15),
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        // color: AppColors.primaryColor2,
+        color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.024),
-            spreadRadius: 1,
-            blurRadius: 20,
-            offset: Offset(0, 5), // Changes position of shadow (x, y)
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            spreadRadius: 5,
-            blurRadius: 25,
-            offset: Offset(0, 10),
-          ),
-        ],
+        boxShadow:
+            isDark
+                ? [
+                  // subtle glow in dark mode
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+                : [
+                  // soft shadow in light mode
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
       ),
       child: Center(
         child: Column(

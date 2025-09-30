@@ -22,6 +22,8 @@ class CustomGenderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.17;
     final width = MediaQuery.of(context).size.width * 0.42;
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -29,6 +31,7 @@ class CustomGenderCard extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           // color: AppColors.primaryColor2,
+          color: isDark ? Colors.grey[900] : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color:
@@ -36,19 +39,22 @@ class CustomGenderCard extends StatelessWidget {
             width: 2.5,
           ),
 
-          boxShadow: [
+          boxShadow: isDark
+              ? [
+            // subtle glow in dark mode
             BoxShadow(
-              color: Colors.black.withOpacity(0.024),
-              spreadRadius: 1,
-              blurRadius: 20,
-              offset: Offset(0, 5), // Changes position of shadow (x, y)
+              color: Colors.white.withOpacity(0.05),
+              blurRadius: 10,
+              offset: Offset(0, 2),
             ),
-
+          ]
+              : [
+            // normal shadow in light mode
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              spreadRadius: 5,
-              blurRadius: 25,
-              offset: Offset(0, 10),
+              blurRadius: 15,
+              spreadRadius: 2,
+              offset: Offset(0, 5),
             ),
           ],
         ),

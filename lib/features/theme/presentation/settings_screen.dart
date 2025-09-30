@@ -12,8 +12,14 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height * 0.06;
-    final width = MediaQuery.of(context).size.width * 0.42;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height * 0.06;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width * 0.42;
 
     final themeBloc = context.read<ThemeBloc>();
     return Scaffold(

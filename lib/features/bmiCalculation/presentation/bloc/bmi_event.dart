@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 
 abstract class BmiEvent extends Equatable {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
@@ -11,7 +10,6 @@ class GenderSelected extends BmiEvent {
   GenderSelected(this.isMale);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [isMale];
 }
 
@@ -21,7 +19,6 @@ class HeightChanged extends BmiEvent {
   HeightChanged(this.value, {this.isCm = true});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [value, isCm];
 }
 
@@ -32,7 +29,6 @@ class HeightFtInChanged extends BmiEvent {
   HeightFtInChanged(this.feet, this.inches);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [feet, inches];
 }
 
@@ -42,7 +38,6 @@ class HeightUnitToggled extends BmiEvent {
   HeightUnitToggled(this.isCm);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [isCm];
 }
 
@@ -52,7 +47,6 @@ class WeightUnitToggled extends BmiEvent {
   WeightUnitToggled(this.isKg);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [isKg];
 }
 

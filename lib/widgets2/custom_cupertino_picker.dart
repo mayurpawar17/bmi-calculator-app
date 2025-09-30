@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 class CustomCupertinoPicker extends StatelessWidget {
   CustomCupertinoPicker({
     super.key,
     required this.valueList,
     required this.unitText,
+    this.onSelectedItemChanged,
   });
 
   final List<int> valueList;
   final String unitText;
+  final onSelectedItemChanged;
 
   final List<int> _items = [
     150,
@@ -37,10 +38,7 @@ class CustomCupertinoPicker extends StatelessWidget {
           width: width,
           child: CupertinoPicker(
             itemExtent: 35.0,
-            onSelectedItemChanged: (int newIndex) {
-              // --- Trigger Haptic Feedback ---
-              HapticFeedback.selectionClick();
-            },
+            onSelectedItemChanged: onSelectedItemChanged,
             magnification: 1.22,
             squeeze: 1.2,
             useMagnifier: true,

@@ -3,8 +3,10 @@ import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi
 import 'package:bmi_calculator_app/widgets2/custom_cupertino_picker.dart';
 import 'package:bmi_calculator_app/widgets2/custom_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../features/bmiCalculation/presentation/bloc/bmi_event.dart';
 import 'height_switch.dart';
 
 class CustomHeightCard extends StatelessWidget {
@@ -16,29 +18,34 @@ class CustomHeightCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.28;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.all(15),
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        // color: AppColors.primaryColor2,
+        color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.024),
-            spreadRadius: 1,
-            blurRadius: 20,
-            offset: Offset(0, 5),
-          ),
-
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            spreadRadius: 5,
-            blurRadius: 25,
-            offset: Offset(0, 10),
-          ),
-        ],
+        boxShadow:
+            isDark
+                ? [
+                  // subtle glow in dark mode
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+                : [
+                  // soft shadow in light mode
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +61,12 @@ class CustomHeightCard extends StatelessWidget {
           BlocBuilder<BmiBloc, BmiState>(
             builder: (context, state) {
               return state.isCm
-                  ? CustomSlider(value: 150, onChanged: (v) {})
+                  ? CustomSlider(
+                    value: 150,
+                    onChanged: (v) {
+                      context.read<BmiBloc>().add(HeightChanged(v, isCm: true));
+                    },
+                  )
                   : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -62,10 +74,28 @@ class CustomHeightCard extends StatelessWidget {
                       CustomCupertinoPicker(
                         valueList: feetList,
                         unitText: 'Ft',
+                        onSelectedItemChanged: (index) {
+                          context.read<BmiBloc>().add(
+                            HeightFtInChanged(
+                              feetList[index],
+                              state.heightCm.toInt() % 12,
+                            ),
+                          );
+                          HapticFeedback.selectionClick();
+                        },
                       ),
                       CustomCupertinoPicker(
                         valueList: inchList,
                         unitText: 'Inch',
+                        onSelectedItemChanged: (index) {
+                          context.read<BmiBloc>().add(
+                            HeightFtInChanged(
+                              state.heightCm ~/ 30.48,
+                              inchList[index],
+                            ),
+                          );
+                          HapticFeedback.selectionClick();
+                        },
                       ),
                     ],
                   );

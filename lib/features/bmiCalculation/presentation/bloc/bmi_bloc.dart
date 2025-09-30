@@ -16,6 +16,22 @@ class BmiBloc extends Bloc<BmiEvent, BmiState> {
       emit(state.copyWith(isCm: event.isCm));
     });
 
+    // ✅ handle height in cm
+    on<HeightChanged>((event, emit) {
+      if (event.isCm) {
+        emit(state.copyWith(heightCm: event.value));
+      }
+    });
+
+
+    // ✅ handle height in ft + inch (convert to cm internally)
+    on<HeightFtInChanged>((event, emit) {
+      final cm = (event.feet * 30.48) + (event.inches * 2.54);
+      emit(state.copyWith(heightCm: cm));
+    });
+
+
+
     // on<UpdateHeightEvent>((event, emit) {
     //   emit(state.copyWith(heightCm: event.heightCm));
     // });
