@@ -5,64 +5,74 @@ abstract class BmiEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+// ------------------ Gender ------------------
 class GenderSelected extends BmiEvent {
-  final bool isMale; // "male" or "female"
+  final bool isMale;
   GenderSelected(this.isMale);
 
   @override
   List<Object?> get props => [isMale];
 }
 
-class HeightChanged extends BmiEvent {
-  final double value;
-  final bool isCm; // true if cm, false if ft/inch
-  HeightChanged(this.value, {this.isCm = true});
+// ------------------ Height ------------------
+// Direct cm input (from slider)
+class HeightChangedCm extends BmiEvent {
+  final double cmValue;
+  HeightChangedCm(this.cmValue);
 
   @override
-  List<Object?> get props => [value, isCm];
+  List<Object?> get props => [cmValue];
 }
 
-class HeightFtInChanged extends BmiEvent {
+// Ft + Inch input (from CupertinoPicker)
+class HeightChangedFtIn extends BmiEvent {
   final int feet;
   final int inches;
-
-  HeightFtInChanged(this.feet, this.inches);
+  HeightChangedFtIn(this.feet, this.inches);
 
   @override
   List<Object?> get props => [feet, inches];
 }
 
+// Toggle between cm and ft-in
 class HeightUnitToggled extends BmiEvent {
   final bool isCm;
-
   HeightUnitToggled(this.isCm);
 
   @override
   List<Object?> get props => [isCm];
 }
 
+// ------------------ Weight ------------------
+// Direct kg input
+class WeightChangedKg extends BmiEvent {
+  final double kgValue;
+  WeightChangedKg(this.kgValue);
+
+  @override
+  List<Object?> get props => [kgValue];
+}
+
+// Direct lbs input
+class WeightChangedLbs extends BmiEvent {
+  final double lbsValue;
+  WeightChangedLbs(this.lbsValue);
+
+  @override
+  List<Object?> get props => [lbsValue];
+}
+
+// Toggle between kg and lbs
 class WeightUnitToggled extends BmiEvent {
   final bool isKg;
-
   WeightUnitToggled(this.isKg);
 
   @override
   List<Object?> get props => [isKg];
 }
 
-class WeightChanged extends BmiEvent {
-  final double value;
-  final bool isKg;
-
-  WeightChanged(this.value, {this.isKg = true});
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [value, isKg];
-}
-
+// ------------------ Final Action ------------------
 class CalculateBMI extends BmiEvent {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }

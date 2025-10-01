@@ -62,9 +62,9 @@ class CustomHeightCard extends StatelessWidget {
             builder: (context, state) {
               return state.isCm
                   ? CustomSlider(
-                    value: 150,
+                    value: state.heightCm,
                     onChanged: (v) {
-                      context.read<BmiBloc>().add(HeightChanged(v, isCm: true));
+                      context.read<BmiBloc>().add(HeightChangedCm(v));
                     },
                   )
                   : Row(
@@ -76,7 +76,7 @@ class CustomHeightCard extends StatelessWidget {
                         unitText: 'Ft',
                         onSelectedItemChanged: (index) {
                           context.read<BmiBloc>().add(
-                            HeightFtInChanged(
+                            HeightChangedFtIn(
                               feetList[index],
                               state.heightCm.toInt() % 12,
                             ),
@@ -89,7 +89,7 @@ class CustomHeightCard extends StatelessWidget {
                         unitText: 'Inch',
                         onSelectedItemChanged: (index) {
                           context.read<BmiBloc>().add(
-                            HeightFtInChanged(
+                            HeightChangedFtIn(
                               state.heightCm ~/ 30.48,
                               inchList[index],
                             ),

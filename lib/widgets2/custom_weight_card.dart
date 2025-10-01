@@ -4,13 +4,18 @@ import 'package:bmi_calculator_app/widgets2/weight_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../features/bmiCalculation/presentation/bloc/bmi_event.dart';
 import 'custom_cupertino_picker.dart';
 
 class CustomWeightCard extends StatelessWidget {
   CustomWeightCard({super.key});
 
   final kgList = List.generate(200, (index) => index + 10);
-  final lbsList = List.generate(420, (index) => index + 22);
+
+  final int lbsStart = 22; // minimum weight in lbs
+  final int lbsCount = 420; // number of items
+
+  final lbsList = List.generate(420, (index) => 22 + index);
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +73,24 @@ class CustomWeightCard extends StatelessWidget {
                             ? CustomCupertinoPicker(
                               valueList: kgList,
                               unitText: 'Kg',
+
+                              onSelectedItemChanged: (kgValue) {
+                                final actualKg = kgList[kgValue];
+                                context.read<BmiBloc>().add(
+                                  WeightChangedKg(actualKg.toDouble()),
+                                );
+                                print(actualKg);
+                              },
                             )
                             : CustomCupertinoPicker(
                               valueList: lbsList,
                               unitText: 'Lbs',
+                              onSelectedItemChanged: (lbsValue) {
+                                final actualLbs = lbsList[lbsValue];
+                                context.read<BmiBloc>().add(
+                                  WeightChangedLbs(actualLbs.toDouble()),
+                                );
+                              },
                             ),
                   ),
                 );

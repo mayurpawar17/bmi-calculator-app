@@ -1,9 +1,11 @@
 class BmiState {
   final bool? isMale;
-  final double heightCm;
-  final double weight;
+  final double heightCm; // always stored in cm
+  final double weight; // always stored in kg
   final bool isCm;
   final bool isKg;
+  final double? bmiResult;
+  final String? bmiCategory;
 
   const BmiState({
     this.isMale,
@@ -11,6 +13,8 @@ class BmiState {
     this.weight = 60,
     this.isCm = true,
     this.isKg = true,
+    this.bmiResult,
+    this.bmiCategory,
   });
 
   BmiState copyWith({
@@ -19,7 +23,8 @@ class BmiState {
     double? weight,
     bool? isCm,
     bool? isKg,
-    bool? gender,
+    double? bmiResult,
+    String? bmiCategory,
   }) {
     return BmiState(
       isMale: isMale ?? this.isMale,
@@ -27,6 +32,8 @@ class BmiState {
       weight: weight ?? this.weight,
       isCm: isCm ?? this.isCm,
       isKg: isKg ?? this.isKg,
+      bmiResult: bmiResult ?? this.bmiResult,
+      bmiCategory: bmiCategory ?? this.bmiCategory,
     );
   }
 }

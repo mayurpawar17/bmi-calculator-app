@@ -1,5 +1,6 @@
 import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
 import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
+import 'package:bmi_calculator_app/features/bmiCalculation/presentation/screens/bmi_result_screen.dart';
 import 'package:bmi_calculator_app/widgets2/custom_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,7 +96,33 @@ class BMICalculatorScreen extends StatelessWidget {
 
                     SizedBox(height: 25),
 
-                    CustomButton2(text: 'Calculate BMI', onTap: () {}),
+                    CustomButton2(
+                      text: 'Calculate BMI',
+                      onTap: () {
+                        final bmiBloc = context.read<BmiBloc>();
+                        final state = bmiBloc.state;
+
+                        if (state.isMale == null) {
+                          // Show snackbar if gender not selected
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please select your gender first'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                          return; // stop further execution
+                        }
+
+                        // Fire the CalculateBMI event if gender is selected
+                        bmiBloc.add(CalculateBMI());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BmiResultScreen(),
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 );
               },
