@@ -25,22 +25,23 @@ class CustomHeightCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: isDark
-            ? [
-                BoxShadow(
-                  color: Colors.white.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 2),
-                ),
-              ]
-            : [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 15,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 5),
-                ),
-              ],
+        boxShadow:
+            isDark
+                ? [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+                : [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,39 +67,52 @@ class CustomHeightCard extends StatelessWidget {
           Consumer<BmiProvider>(
             builder: (context, bmiProvider, child) {
               return Expanded(
-                child: bmiProvider.isCm
-                    ? CustomSlider(
-                        value: bmiProvider.heightCm,
-                        onChanged: (newHeight) {
-                          bmiProvider.setHeight(newHeight);
-                          bmiProvider.calculateBmi();
-                        },
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          CustomCupertinoPicker(
-                            valueList: feetList,
-                            unitText: 'Ft',
-                            onSelectedItemChanged: (index) {
-                              final newFeet = feetList[index].toDouble();
-                              bmiProvider.setFeet(newFeet);
-                              bmiProvider.calculateBmi();
-                              HapticFeedback.selectionClick();
-                            },
-                          ),
-                          CustomCupertinoPicker(
-                            valueList: inchList,
-                            unitText: 'Inch',
-                            onSelectedItemChanged: (index) {
-                              final newInches = inchList[index].toDouble();
-                              bmiProvider.setInches(newInches);
-                              bmiProvider.calculateBmi();
-                              HapticFeedback.selectionClick();
-                            },
-                          ),
-                        ],
-                      ),
+                child:
+                    bmiProvider.isCm
+                        ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomSlider(
+                              value: bmiProvider.heightCm,
+                              onChanged: (newHeight) {
+                                bmiProvider.setHeight(newHeight);
+                                bmiProvider.calculateBmi();
+                              },
+                            ),
+                            Text(
+                              '${bmiProvider.heightCm.toStringAsFixed(0)} Cm',
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                          ],
+                        )
+                        : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CustomCupertinoPicker(
+                              valueList: feetList,
+                              unitText: 'Ft',
+                              onSelectedItemChanged: (index) {
+                                final newFeet = feetList[index].toDouble();
+                                bmiProvider.setFeet(newFeet);
+                                bmiProvider.calculateBmi();
+                                HapticFeedback.selectionClick();
+                              },
+                            ),
+                            CustomCupertinoPicker(
+                              valueList: inchList,
+                              unitText: 'Inch',
+                              onSelectedItemChanged: (index) {
+                                final newInches = inchList[index].toDouble();
+                                bmiProvider.setInches(newInches);
+                                bmiProvider.calculateBmi();
+                                HapticFeedback.selectionClick();
+                              },
+                            ),
+                          ],
+                        ),
               );
             },
           ),
