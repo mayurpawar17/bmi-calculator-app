@@ -1,47 +1,38 @@
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
-import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_bloc.dart';
-import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_event.dart';
-import 'package:bmi_calculator_app/features/theme/presentation/bloc/theme_state.dart';
-import 'package:bmi_calculator_app/screens2/bmi_calculator_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import 'features/bmi/presentation/screens/bmi_calculator_screen.dart';
+import 'features/bmi/provider/bmi_provider.dart';
+import 'features/theme/presentation/app_themes.dart';
+import 'features/theme/provider/theme_provider.dart';
 
 void main() {
   runApp(
-    MultiBlocProvider(
+    MultiProvider(
       providers: [
-        BlocProvider(create: (_) => BmiBloc()),
-        BlocProvider(create: (_) => ThemeBloc()..add(LoadTheme())),
+        ChangeNotifierProvider(create: (_) => BmiProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
-      child: const BMICalculator(),
+      child: const MyApp(),
     ),
   );
 }
 
-class BMICalculator extends StatelessWidget {
-  const BMICalculator({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, state) {
-        return AnimatedTheme(
-          data: state.themeData,
-          duration: const Duration(milliseconds: 200),
-          child: MaterialApp(
-            theme: state.themeData,
-
-            debugShowCheckedModeBanner: false,
-            home: BMICalculatorScreen(),
-          ),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: themeProvider.themeMode,
+          home: BmiCalculatorScreen(),
+          debugShowCheckedModeBanner: false,
         );
       },
     );
   }
 }
-
-//
-// theme: ThemeData.light().copyWith(
-// scaffoldBackgroundColor: primaryColor,
-// textTheme: GoogleFonts.openSansTextTheme(),
-// )

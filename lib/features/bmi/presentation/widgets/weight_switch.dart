@@ -1,9 +1,8 @@
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_event.dart';
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/bmi_provider.dart';
 
 class WeightSwitch extends StatelessWidget {
   const WeightSwitch({super.key});
@@ -27,29 +26,32 @@ class WeightSwitch extends StatelessWidget {
       decoration: _switchDecoration,
       padding: const EdgeInsets.all(2),
 
-      child: BlocBuilder<BmiBloc, BmiState>(
-        builder: (context, state) {
+      child: Consumer<BmiProvider>(
+        builder: (context, bmiProvider, child) {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildUnitSwitch(
                 label: 'Kg',
-                isActive: state.isKg,
-                onTap:
-                    () => {
-                      context.read<BmiBloc>().add(WeightUnitToggled(true)),
-                      HapticFeedback.selectionClick(),
-                    },
+                isActive: bmiProvider.isKg,
+                onTap: () {
+                  if (!bmiProvider.isKg) {
+                    bmiProvider.weightToggle();
+                  }
+
+                  HapticFeedback.selectionClick();
+                },
               ),
               SizedBox(width: 2),
               _buildUnitSwitch(
                 label: 'Lbs',
-                isActive: !state.isKg,
-                onTap:
-                    () => {
-                      context.read<BmiBloc>().add(WeightUnitToggled(false)),
-                      HapticFeedback.selectionClick(),
-                    },
+                isActive: !bmiProvider.isKg,
+                onTap: () {
+                  if (bmiProvider.isKg) {
+                    bmiProvider.weightToggle();
+                  }
+                  HapticFeedback.selectionClick();
+                },
               ),
             ],
           );

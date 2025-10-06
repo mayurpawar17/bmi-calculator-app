@@ -1,9 +1,8 @@
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_event.dart';
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/bmi_provider.dart';
 
 class HeightSwitch extends StatelessWidget {
   const HeightSwitch({super.key});
@@ -23,33 +22,38 @@ class HeightSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final bmiProvider = Provider.of<BmiProvider>(context);
     return Container(
       decoration: _switchDecoration,
       padding: const EdgeInsets.all(2),
 
-      child: BlocBuilder<BmiBloc, BmiState>(
-        builder: (context, state) {
+      child: Consumer<BmiProvider>(
+        builder: (context, bmiProvider, child) {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildUnitSwitch(
                 label: 'Cm',
-                isActive: state.isCm,
-                onTap:
-                    () => {
-                      context.read<BmiBloc>().add(HeightUnitToggled(true)),
-                      HapticFeedback.selectionClick(),
-                    },
+                isActive: bmiProvider.isCm,
+                onTap: () {
+                  if (!bmiProvider.isCm) {
+                    bmiProvider.heightToggle();
+                  }
+
+                  HapticFeedback.selectionClick();
+                },
               ),
-              SizedBox(width: 2),
+              const SizedBox(width: 2),
               _buildUnitSwitch(
                 label: 'Ft',
-                isActive: !state.isCm,
-                onTap:
-                    () => {
-                      context.read<BmiBloc>().add(HeightUnitToggled(false)),
-                      HapticFeedback.selectionClick(),
-                    },
+                isActive: !bmiProvider.isCm,
+                onTap: () {
+                  if (bmiProvider.isCm) {
+                    bmiProvider.heightToggle();
+                  }
+
+                  HapticFeedback.selectionClick();
+                },
               ),
             ],
           );

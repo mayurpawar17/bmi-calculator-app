@@ -1,6 +1,7 @@
-import 'package:bmi_calculator_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/utils/app_colors.dart';
 
 class AppThemes {
   // Light Theme

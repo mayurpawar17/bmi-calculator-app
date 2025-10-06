@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 
 class CustomGenderCard extends StatelessWidget {
   final VoidCallback onTap;
@@ -34,33 +34,43 @@ class CustomGenderCard extends StatelessWidget {
           color: isDark ? Colors.grey[900] : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color:
-                isSelected ? AppColors.accentBlueDarkColor : Colors.transparent,
+            color: isSelected
+                ? AppColors.accentBlueDarkColor
+                : Colors.transparent,
             width: 2.5,
           ),
 
           boxShadow: isDark
               ? [
-            // subtle glow in dark mode
-            BoxShadow(
-              color: Colors.white.withOpacity(0.05),
-              blurRadius: 10,
-              offset: Offset(0, 2),
-            ),
-          ]
+                  // subtle glow in dark mode
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: Offset(0, 2),
+                  ),
+                ]
               : [
-            // normal shadow in light mode
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 15,
-              spreadRadius: 2,
-              offset: Offset(0, 5),
-            ),
-          ],
+                  // normal shadow in light mode
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                    offset: Offset(0, 5),
+                  ),
+                ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [Text(text), Image.asset(asset, height: 100)],
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                color: isDark ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Image.asset(asset, height: 100),
+          ],
         ),
       ),
     );

@@ -1,10 +1,9 @@
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_bloc.dart';
-import 'package:bmi_calculator_app/features/bmiCalculation/presentation/bloc/bmi_state.dart';
-import 'package:bmi_calculator_app/widgets2/weight_switch.dart';
+import 'package:bmi_calculator_app/features/bmi/presentation/widgets/weight_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-import '../features/bmiCalculation/presentation/bloc/bmi_event.dart';
+import '../../provider/bmi_provider.dart';
 import 'custom_cupertino_picker.dart';
 
 class CustomWeightCard extends StatelessWidget {
@@ -20,7 +19,7 @@ class CustomWeightCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.25;
-    final width = MediaQuery.of(context).size.width * 0.5;
+    // final width = MediaQuery.of(context).size.width * 0.5;
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
@@ -58,43 +57,47 @@ class CustomWeightCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Weight', style: TextStyle(fontWeight: FontWeight.w700)),
+                Text(
+                  'Weight',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
 
                 WeightSwitch(),
               ],
             ),
-            BlocBuilder<BmiBloc, BmiState>(
-              builder: (context, state) {
-                return Center(
-                  child: SizedBox(
+            Center(
+              child: Consumer<BmiProvider>(
+                builder: (context, bmiProvider, child) {
+                  return SizedBox(
                     width: 150, // give it a fixed width
                     child:
-                        state.isKg
+                        bmiProvider.isKg
                             ? CustomCupertinoPicker(
                               valueList: kgList,
                               unitText: 'Kg',
-
-                              onSelectedItemChanged: (kgValue) {
-                                final actualKg = kgList[kgValue];
-                                context.read<BmiBloc>().add(
-                                  WeightChangedKg(actualKg.toDouble()),
-                                );
-                                print(actualKg);
+                              onSelectedItemChanged: (index) {
+                                final kgValue = kgList[index].toDouble();
+                                bmiProvider.setWeight(kgValue);
+                                bmiProvider.calculateBmi();
+                                HapticFeedback.selectionClick();
                               },
                             )
                             : CustomCupertinoPicker(
                               valueList: lbsList,
                               unitText: 'Lbs',
-                              onSelectedItemChanged: (lbsValue) {
-                                final actualLbs = lbsList[lbsValue];
-                                context.read<BmiBloc>().add(
-                                  WeightChangedLbs(actualLbs.toDouble()),
-                                );
+                              onSelectedItemChanged: (index) {
+                                final lbsValue = lbsList[index].toDouble();
+                                bmiProvider.setWeight(lbsValue);
+                                bmiProvider.calculateBmi();
+                                HapticFeedback.selectionClick();
                               },
                             ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),

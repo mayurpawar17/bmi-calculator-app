@@ -23,6 +23,7 @@ dependencies:
   shared_preferences: ^2.5.3
   flutter_animated_icons: 1.0.1
   animated_icon_button: ^1.0.2
+  provider: ^6.1.5+1
 
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CustomCupertinoPicker extends StatelessWidget {
   CustomCupertinoPicker({
@@ -31,6 +32,7 @@ class CustomCupertinoPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.15;
     final width = MediaQuery.of(context).size.width * 0.35;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
       children: [
         SizedBox(
@@ -43,15 +45,20 @@ class CustomCupertinoPicker extends StatelessWidget {
             squeeze: 1.2,
             useMagnifier: true,
             looping: false,
-            children:
-                valueList.map((int item) {
-                  return Center(
-                    child: Text('${item}', style: TextStyle(fontSize: 14)),
-                  );
-                }).toList(),
+            children: valueList.map((int item) {
+              return Center(
+                child: Text('${item}', style: TextStyle(fontSize: 14)),
+              );
+            }).toList(),
           ),
         ),
-        Text(unitText, style: TextStyle(fontWeight: FontWeight.w700)),
+        Text(
+          unitText,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: isDark ? CupertinoColors.white : CupertinoColors.black,
+          ),
+        ),
       ],
     );
   }

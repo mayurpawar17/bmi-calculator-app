@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../screens/inputScreen.dart' as AppColors;
+import '../utils/app_colors.dart';
 
-class CustomButton2 extends StatelessWidget {
-  const CustomButton2({super.key, required this.text, required this.onTap});
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key, required this.text, required this.onTap});
 
   final String text;
   final VoidCallback onTap;
