@@ -89,27 +89,40 @@ class CustomHeightCard extends StatelessWidget {
                           ],
                         )
                         : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CustomCupertinoPicker(
-                              valueList: feetList,
-                              unitText: 'Ft',
-                              onSelectedItemChanged: (index) {
-                                final newFeet = feetList[index].toDouble();
-                                bmiProvider.setFeet(newFeet);
-                                bmiProvider.calculateBmi();
-                                HapticFeedback.selectionClick();
-                              },
+                            Expanded(
+                              child: CustomCupertinoPicker(
+                                key: const ValueKey('ftPicker'),
+                                valueList: feetList,
+                                unitText: 'Ft',
+                                onSelectedItemChanged: (index) {
+                                  final newFeet = feetList[index].toDouble();
+                                  bmiProvider.setFeet(newFeet);
+                                  bmiProvider.calculateBmi();
+                                  HapticFeedback.selectionClick();
+                                },
+                                initialValue: feetList.indexOf(
+                                  bmiProvider.feet.toInt(),
+                                ),
+                              ),
                             ),
-                            CustomCupertinoPicker(
-                              valueList: inchList,
-                              unitText: 'Inch',
-                              onSelectedItemChanged: (index) {
-                                final newInches = inchList[index].toDouble();
-                                bmiProvider.setInches(newInches);
-                                bmiProvider.calculateBmi();
-                                HapticFeedback.selectionClick();
-                              },
+                            const SizedBox(width: 10),
+
+                            Expanded(
+                              child: CustomCupertinoPicker(
+                                key: const ValueKey('inchPicker'),
+                                valueList: inchList,
+                                unitText: 'In',
+                                onSelectedItemChanged: (index) {
+                                  final newInches = inchList[index].toDouble();
+                                  bmiProvider.setInches(newInches);
+                                  bmiProvider.calculateBmi();
+                                  HapticFeedback.selectionClick();
+                                },
+                                initialValue: inchList.indexOf(
+                                  bmiProvider.inches.toInt(),
+                                ),
+                              ),
                             ),
                           ],
                         ),

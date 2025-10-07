@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,7 +16,9 @@ class AppThemes {
       elevation: 0,
       centerTitle: true,
     ),
-    fontFamily: GoogleFonts.openSans().fontFamily,
+    fontFamily: GoogleFonts
+        .openSans()
+        .fontFamily,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 16, color: Colors.black87),
       bodyMedium: TextStyle(fontSize: 14, color: Colors.black54),
@@ -28,6 +31,14 @@ class AppThemes {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       ),
+    ),
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: SharedAxisPageTransitionsBuilder(
+          transitionType: SharedAxisTransitionType.horizontal,
+          fillColor: Colors.white,
+        ),
+      },
     ),
   );
 
@@ -42,7 +53,9 @@ class AppThemes {
       elevation: 0,
       centerTitle: true,
     ),
-    fontFamily: GoogleFonts.openSans().fontFamily,
+    fontFamily: GoogleFonts
+        .openSans()
+        .fontFamily,
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
       bodyMedium: TextStyle(fontSize: 14, color: Colors.white70),
@@ -56,6 +69,14 @@ class AppThemes {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       ),
+    ),
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: SharedAxisPageTransitionsBuilder(
+          transitionType: SharedAxisTransitionType.horizontal,
+          fillColor: Colors.black,
+        ),
+      },
     ),
   );
 }

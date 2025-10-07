@@ -11,7 +11,9 @@ class BmiResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = Theme
+        .of(context)
+        .brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -27,41 +29,51 @@ class BmiResultScreen extends StatelessWidget {
                       // color: Colors.white,
                       height: 300,
 
-                      child: BMIGaugeRange(
-                        bmi: bmiProvider.bmiResult!,
-                        gender: bmiProvider.selectedGender!,
-                      ),
+                      child: BMIGaugeRange(bmi: bmiProvider.bmiResult!),
                     );
                   },
                 ),
 
                 Consumer<BmiProvider>(
                   builder: (context, bmiProvider, child) {
-                    return Column(
-                      children: [
-                        Text(
-                          "Your BMI: ${bmiProvider.bmiResult?.toStringAsFixed(1) ?? '--'}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        Text(
-                          "Category: ${bmiProvider.bmiCategory ?? '--'}",
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        Text(
-                          "Hint: ${bmiProvider.bmiMsg ?? '--'}",
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                    return FutureBuilder(
+                      future: Future.delayed(
+                          const Duration(milliseconds: 1000)),
+                      builder: (context, snapshot) {
+                        final showResult =
+                            snapshot.connectionState == ConnectionState.done;
+
+                        return Column(
+                          children: [
+                            Text(
+                              "Your BMI: ${showResult ? (bmiProvider.bmiResult
+                                  ?.toStringAsFixed(1) ?? '--') : '--'}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            Text(
+                              "Category: ${showResult ? (bmiProvider
+                                  .bmiCategory ?? '--') : '--'}",
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 50),
+                            Text(
+                              "Hint: ${showResult
+                                  ? (bmiProvider.bmiMsg ?? '--')
+                                  : '--'}",
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
                 ),

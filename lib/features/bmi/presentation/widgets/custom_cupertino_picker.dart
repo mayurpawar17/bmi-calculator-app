@@ -7,26 +7,13 @@ class CustomCupertinoPicker extends StatelessWidget {
     required this.valueList,
     required this.unitText,
     this.onSelectedItemChanged,
+    required this.initialValue,
   });
 
   final List<int> valueList;
   final String unitText;
   final onSelectedItemChanged;
-
-  final List<int> _items = [
-    150,
-    155,
-    160,
-    163, // Approx. average female height in some regions
-    165,
-    170,
-    175,
-    177, // Approx. average male height in some regions
-    180,
-    183,
-    185,
-    190,
-  ];
+  final int initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +26,24 @@ class CustomCupertinoPicker extends StatelessWidget {
           height: height,
           width: width,
           child: CupertinoPicker(
+            scrollController: FixedExtentScrollController(
+              initialItem: initialValue,
+            ),
             itemExtent: 35.0,
             onSelectedItemChanged: onSelectedItemChanged,
             magnification: 1.22,
             squeeze: 1.2,
             useMagnifier: true,
             looping: false,
-            children: valueList.map((int item) {
-              return Center(
-                child: Text('${item}', style: TextStyle(fontSize: 14)),
-              );
-            }).toList(),
+            children:
+                valueList.map((int item) {
+                  return Center(
+                    child: Text('${item}', style: TextStyle(fontSize: 14)),
+                  );
+                }).toList(),
           ),
         ),
+
         Text(
           unitText,
           style: TextStyle(

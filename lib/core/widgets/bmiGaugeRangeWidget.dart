@@ -1,20 +1,19 @@
+import 'package:bmi_calculator_app/core/utils/app_colors.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_font_icons/flutter_font_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../features/bmi/provider/bmi_provider.dart';
 
 class BMIGaugeRange extends StatelessWidget {
-  const BMIGaugeRange({super.key, required this.bmi, required this.gender});
+  const BMIGaugeRange({super.key, required this.bmi});
 
   final double bmi;
-  final Gender gender;
 
   // Constants
   static const double _gaugeThickness = 0.2;
-  static const double _pointerSize = 27;
+  static const double _pointerSize = 25;
   static const double _bmiTextSize = 34;
   static const double _radiusFactor = 0.9;
   static const double _annotationPosFactor = 0.1;
@@ -24,7 +23,7 @@ class BMIGaugeRange extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return SfRadialGauge(
       enableLoadingAnimation: true,
-      animationDuration: 1500,
+      animationDuration: 500,
       axes: <RadialAxis>[
         RadialAxis(
           minimum: 10,
@@ -79,8 +78,8 @@ class BMIGaugeRange extends StatelessWidget {
               value: bmi,
               enableAnimation: true,
               child: Icon(
-                gender == Gender.male ? Foundation.male : Foundation.female,
-                color: Colors.white, // Dynamic color
+                EvaIcons.arrowUp,
+                color: AppColors.accentBlueDarkColor,
                 size: _pointerSize,
               ),
             ),
@@ -94,7 +93,7 @@ class BMIGaugeRange extends StatelessWidget {
                     builder: (context, bmiProvider, child) {
                       return Text(
                         bmi.toStringAsFixed(1),
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
                           fontSize: _bmiTextSize,
                           fontWeight: FontWeight.bold,
                           color: bmiProvider.getBMIColor(bmi),

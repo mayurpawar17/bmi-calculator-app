@@ -27,6 +27,7 @@ class BmiProvider extends ChangeNotifier {
   double? get bmiResult => _bmiResult;
 
   String? get bmiCategory => _bmiCategory;
+
   String? get bmiMsg => _bmiMsg;
 
   double get feet => _feet;
@@ -60,7 +61,15 @@ class BmiProvider extends ChangeNotifier {
   }
 
   void weightToggle() {
-    _weightUnit = _weightUnit == WeightUnit.kg ? WeightUnit.lbs : WeightUnit.kg;
+    if (_weightUnit == WeightUnit.kg) {
+      // switch to lbs
+      _weightUnit = WeightUnit.lbs;
+      _lbs = _weightKg / 0.453592; // convert kg → lbs
+    } else {
+      // switch to kg
+      _weightUnit = WeightUnit.kg;
+      _weightKg = _lbs * 0.453592; // convert lbs → kg
+    }
     notifyListeners();
   }
 
@@ -87,8 +96,10 @@ class BmiProvider extends ChangeNotifier {
   void setWeight(double newWeight) {
     if (_weightUnit == WeightUnit.kg) {
       _weightKg = newWeight;
+      _lbs = newWeight / 0.453592; // sync lbs
     } else {
-      _weightKg = lbsToKg(newWeight);
+      _lbs = newWeight;
+      _weightKg = newWeight * 0.453592; // sync kg
     }
     notifyListeners();
   }
@@ -106,12 +117,14 @@ class BmiProvider extends ChangeNotifier {
   // ===== BMI Calculation =====
   void calculateBmi() {
     double height =
-        _heightUnit == HeightUnit.ft ? ftToCm(_feet, _inches) : _heightCm;
-
-    if (height <= 0 || _weightKg <= 0) return;
+    _heightUnit == HeightUnit.ft ? ftToCm(_feet, _inches) : _heightCm;
+    // double weight = _weightUnit == WeightUnit.kg ? lbsToKg(_lbs) : _weightKg;
+    // notifyListeners();
+    double weight = _weightUnit == WeightUnit.kg ? _weightKg : lbsToKg(_lbs);
+    if (height <= 0 || weight <= 0) return;
 
     double heightM = height / 100; // convert cm → meters
-    _bmiResult = _weightKg / (heightM * heightM);
+    _bmiResult = weight / (heightM * heightM);
     _bmiCategory = _getBmiCategory(_bmiResult!);
     _bmiMsg = _getBmiMsg(_bmiResult!);
 

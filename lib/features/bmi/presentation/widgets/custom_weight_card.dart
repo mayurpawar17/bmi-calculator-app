@@ -64,6 +64,7 @@ class CustomWeightCard extends StatelessWidget {
                     color: isDark ? Colors.white : Colors.black,
                   ),
                 ),
+                SizedBox(width: 10),
 
                 WeightSwitch(),
               ],
@@ -76,6 +77,7 @@ class CustomWeightCard extends StatelessWidget {
                     child:
                         bmiProvider.isKg
                             ? CustomCupertinoPicker(
+                              key: const ValueKey('kgPicker'),
                               valueList: kgList,
                               unitText: 'Kg',
                               onSelectedItemChanged: (index) {
@@ -84,8 +86,12 @@ class CustomWeightCard extends StatelessWidget {
                                 bmiProvider.calculateBmi();
                                 HapticFeedback.selectionClick();
                               },
+                              initialValue: kgList.indexOf(
+                                bmiProvider.weightKg.toInt(),
+                              ),
                             )
                             : CustomCupertinoPicker(
+                              key: const ValueKey('lbsPicker'),
                               valueList: lbsList,
                               unitText: 'Lbs',
                               onSelectedItemChanged: (index) {
@@ -94,6 +100,9 @@ class CustomWeightCard extends StatelessWidget {
                                 bmiProvider.calculateBmi();
                                 HapticFeedback.selectionClick();
                               },
+                              initialValue: lbsList.indexOf(
+                                bmiProvider.lbs.toInt(),
+                              ),
                             ),
                   );
                 },
