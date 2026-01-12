@@ -3,7 +3,7 @@ description: "Bmi Calculator App"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.2+3
+version: 3.0.2+5
 
 environment:
   sdk: ^3.7.2
@@ -12,22 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  hexcolor: ^3.0.1
-  flutter_font_icons: ^2.2.7
-  google_fonts: ^6.3.2
-  syncfusion_flutter_gauges: ^24.2.9
-  url_launcher:
-  flutter_bloc: ^9.1.1
-  equatable: ^2.0.7
-  flutter_svg: ^2.2.1
   shared_preferences: ^2.5.3
-  flutter_animated_icons: 1.0.1
-  animated_icon_button: ^1.0.2
   provider: ^6.1.5+1
   animations: ^2.0.11
-  font_awesome_flutter: ^10.9.1
-  eva_icons_flutter: ^3.1.0
-  ionicons: ^0.2.2
+  fl_chart: ^1.1.1
 
 
 
@@ -40,7 +28,7 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  image_path: "assets/icon/bmi_app_icon.png"
+  image_path: "assets/icon/bmi_app_icon2.png"
   min_sdk_android: 21
 
 
@@ -63,3 +51,8 @@ flutter:
   assets:
     - assets/
 
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/openSansRegular.ttf

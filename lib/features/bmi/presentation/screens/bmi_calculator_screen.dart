@@ -1,3 +1,4 @@
+import 'package:bmi_calculator_app/core/utils/helper_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,32 +16,21 @@ class BmiCalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        centerTitle: true,
-        title: Text(
-          "BMI FitIndex Pro",
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
+        title: Text("BMI FitIndex Pro", style: TextStyle(fontWeight: FontWeight.w600)),
         actions: [
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               return IconButton(
                 icon: AnimatedCrossFade(
-                  firstChild: Icon(Icons.sunny),
-                  secondChild: Icon(Icons.dark_mode),
-                  crossFadeState:
-                      isDark
-                          ? CrossFadeState.showSecond
-                          : CrossFadeState.showFirst,
+                  firstChild: Icon(Icons.dark_mode),
+                  secondChild: Icon(Icons.sunny),
+                  crossFadeState: context.isDark ? CrossFadeState.showSecond : CrossFadeState.showFirst,
                   duration: Duration(milliseconds: 300),
                 ),
                 onPressed: () {
-                  themeProvider.toggleTheme(isDark);
+                  themeProvider.toggleTheme(context.isDark);
                   HapticFeedback.selectionClick();
                 },
               );
@@ -97,21 +87,14 @@ class BmiCalculatorScreen extends StatelessWidget {
               Consumer<BmiProvider>(
                 builder: (context, bmiProvider, child) {
                   return CustomButton(
-                    text: 'Calculate BMI',
-                    onTap: () {
+                    title: 'Calculate BMI',
+                    onPressed: () {
                       HapticFeedback.selectionClick();
                       if (bmiProvider.selectedGender != null) {
                         bmiProvider.calculateBmi();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BmiResultScreen(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BmiResultScreen()));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Please select Gender!!!')),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please select Gender!!!')));
                       }
                     },
                   );

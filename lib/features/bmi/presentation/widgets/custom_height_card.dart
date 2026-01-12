@@ -1,136 +1,68 @@
+import 'package:bmi_calculator_app/features/bmi/presentation/widgets/unit_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/bmi_provider.dart';
+import 'bmi_section_card.dart';
 import 'custom_cupertino_picker.dart';
 import 'custom_slider.dart';
-import 'height_switch.dart';
 
 class CustomHeightCard extends StatelessWidget {
   CustomHeightCard({super.key});
 
-  final feetList = List.generate(6, (index) => index + 3); // 3–8 ft
-  final inchList = List.generate(12, (index) => index); // 0–11 inch
+  final feetList = List.generate(6, (i) => i + 3);
+  final inchList = List.generate(12, (i) => i);
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height * 0.25;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Container(
-      padding: const EdgeInsets.all(15),
-      height: height,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: isDark ? Colors.grey[900] : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow:
-            isDark
-                ? [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-                : [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 15,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Title + switch
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Height',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-              ),
-              const SizedBox(width: 10),
-              const HeightSwitch(),
-            ],
-          ),
-
-          // Height input (cm or ft/in)
-          Consumer<BmiProvider>(
-            builder: (context, bmiProvider, child) {
-              return Expanded(
-                child:
-                    bmiProvider.isCm
-                        ? Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomSlider(
-                              value: bmiProvider.heightCm,
-                              onChanged: (newHeight) {
-                                bmiProvider.setHeight(newHeight);
-                                bmiProvider.calculateBmi();
-                              },
-                            ),
-                            Text(
-                              '${bmiProvider.heightCm.toStringAsFixed(0)} Cm',
-                              style: TextStyle(
-                                color: isDark ? Colors.white : Colors.black,
-                              ),
-                            ),
-                          ],
-                        )
-                        : Row(
-                          children: [
-                            Expanded(
-                              child: CustomCupertinoPicker(
-                                key: const ValueKey('ftPicker'),
-                                valueList: feetList,
-                                unitText: 'Ft',
-                                onSelectedItemChanged: (index) {
-                                  final newFeet = feetList[index].toDouble();
-                                  bmiProvider.setFeet(newFeet);
-                                  bmiProvider.calculateBmi();
-                                  HapticFeedback.selectionClick();
-                                },
-                                initialValue: feetList.indexOf(
-                                  bmiProvider.feet.toInt(),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-
-                            Expanded(
-                              child: CustomCupertinoPicker(
-                                key: const ValueKey('inchPicker'),
-                                valueList: inchList,
-                                unitText: 'In',
-                                onSelectedItemChanged: (index) {
-                                  final newInches = inchList[index].toDouble();
-                                  bmiProvider.setInches(newInches);
-                                  bmiProvider.calculateBmi();
-                                  HapticFeedback.selectionClick();
-                                },
-                                initialValue: inchList.indexOf(
-                                  bmiProvider.inches.toInt(),
-                                ),
-                              ),
-                            ),
-                          ],
+    return Consumer<BmiProvider>(
+      builder: (context, bmi, _) {
+        return BmiSectionCard(
+          title: 'Height',
+          switchWidget: UnitToggleSwitch(leftLabel: 'Cm', rightLabel: 'Ft', isLeftActive: bmi.isCm, onLeftTap: bmi.heightToggle, onRightTap: bmi.heightToggle),
+          child:
+              bmi.isCm
+                  ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomSlider(
+                        value: bmi.heightCm,
+                        onChanged: (v) {
+                          bmi.setHeight(v);
+                          bmi.calculateBmi();
+                        },
+                      ),
+                      Text('${bmi.heightCm.toInt()} Cm'),
+                    ],
+                  )
+                  : Row(
+                    children: [
+                      Expanded(
+                        child: CustomCupertinoPicker(
+                          valueList: feetList,
+                          unitText: 'Ft',
+                          initialValue: feetList.indexOf(bmi.feet.toInt()),
+                          onSelectedItemChanged: (i) {
+                            bmi.setFeet(feetList[i].toDouble());
+                            bmi.calculateBmi();
+                          },
                         ),
-              );
-            },
-          ),
-        ],
-      ),
+                      ),
+                      Expanded(
+                        child: CustomCupertinoPicker(
+                          valueList: inchList,
+                          unitText: 'In',
+                          initialValue: inchList.indexOf(bmi.inches.toInt()),
+                          onSelectedItemChanged: (i) {
+                            bmi.setInches(inchList[i].toDouble());
+                            bmi.calculateBmi();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+        );
+      },
     );
   }
 }

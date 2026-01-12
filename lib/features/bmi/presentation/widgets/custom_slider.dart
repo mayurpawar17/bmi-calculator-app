@@ -12,25 +12,18 @@ class CustomSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: AppColors.accentBlueDarkColor,
-        inactiveTrackColor: AppColors.accentBlueDarkColor.withOpacity(0.3),
+        activeTrackColor: AppColors.primaryColor,
+        inactiveTrackColor: AppColors.primaryColor.withOpacity(0.3),
         trackHeight: 6.0,
         thumbColor: Colors.white,
         thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12),
-        overlayColor: Colors.blueAccent.withOpacity(0.2),
+        overlayColor: AppColors.primaryColor.withOpacity(0.2),
         overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
-        valueIndicatorColor: AppColors.accentBlueDarkColor.withOpacity(0.9),
+        valueIndicatorColor: AppColors.primaryColor.withOpacity(0.9),
         valueIndicatorTextStyle: const TextStyle(fontSize: 14),
         showValueIndicator: ShowValueIndicator.always,
       ),
-      child: Slider(
-        value: value,
-        min: 100,
-        max: 220,
-        divisions: 120,
-        label: "${value.toStringAsFixed(0)} cm",
-        onChanged: onChanged,
-      ),
+      child: Slider(value: value, min: 100, max: 220, divisions: 120, label: "${value.toStringAsFixed(0)} cm", onChanged: onChanged),
     );
   }
 }
