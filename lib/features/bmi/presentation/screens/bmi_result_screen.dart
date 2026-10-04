@@ -36,19 +36,46 @@ class BmiResultScreen extends StatelessWidget {
                 Consumer<BmiProvider>(
                   builder: (context, bmiProvider, child) {
                     return FutureBuilder(
-                      future: Future.delayed(const Duration(milliseconds: 1000)),
+                      future: Future.delayed(
+                        const Duration(milliseconds: 1000),
+                      ),
                       builder: (context, snapshot) {
-                        final showResult = snapshot.connectionState == ConnectionState.done;
+                        final showResult =
+                            snapshot.connectionState == ConnectionState.done;
 
                         return Column(
                           children: [
                             Text(
                               "Your BMI: ${showResult ? (bmiProvider.bmiResult?.toStringAsFixed(1) ?? '--') : '--'}",
-                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18, color: context.isDark ? Colors.white : Colors.black),
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                color:
+                                    context.isDark
+                                        ? Colors.white
+                                        : Colors.black,
+                              ),
                             ),
-                            Text("Category: ${showResult ? (bmiProvider.bmiCategory ?? '--') : '--'}", style: TextStyle(color: context.isDark ? Colors.white : Colors.black)),
+                            Text(
+                              "Category: ${showResult ? (bmiProvider.bmiCategory ?? '--') : '--'}",
+                              style: TextStyle(
+                                color:
+                                    context.isDark
+                                        ? Colors.white
+                                        : Colors.black,
+                              ),
+                            ),
                             const SizedBox(height: 50),
-                            Text("Hint: ${showResult ? (bmiProvider.bmiMsg ?? '--') : '--'}", style: TextStyle(color: context.isDark ? Colors.white : Colors.black), textAlign: TextAlign.center),
+                            Text(
+                              "Hint: ${showResult ? (bmiProvider.bmiMsg ?? '--') : '--'}",
+                              style: TextStyle(
+                                color:
+                                    context.isDark
+                                        ? Colors.white
+                                        : Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ],
                         );
                       },

@@ -16,7 +16,14 @@ class CustomButton extends StatelessWidget {
   final ButtonWidth width;
   final bool isLoading;
 
-  const CustomButton({super.key, required this.title, this.onPressed, this.height = ButtonHeight.medium, this.width = ButtonWidth.full, this.isLoading = false});
+  const CustomButton({
+    super.key,
+    required this.title,
+    this.onPressed,
+    this.height = ButtonHeight.medium,
+    this.width = ButtonWidth.full,
+    this.isLoading = false,
+  });
 
   double _height(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
@@ -74,13 +81,28 @@ class CustomButton extends StatelessWidget {
           backgroundColor: AppColors.primaryColor,
           foregroundColor: Colors.white,
           padding: _padding(),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
         onPressed: isLoading ? null : onPressed,
         child:
             isLoading
-                ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                : Text(title, style: TextStyle(fontWeight: FontWeight.w600, fontSize: _fontSize(context))),
+                ? const SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
+                )
+                : Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: _fontSize(context),
+                  ),
+                ),
       ),
     );
   }

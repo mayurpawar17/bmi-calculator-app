@@ -2,7 +2,13 @@ import 'package:bmi_calculator_app/core/utils/helper_methods.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomCupertinoPicker extends StatefulWidget {
-  const CustomCupertinoPicker({super.key, required this.valueList, required this.unitText, required this.initialValue, this.onSelectedItemChanged});
+  const CustomCupertinoPicker({
+    super.key,
+    required this.valueList,
+    required this.unitText,
+    required this.initialValue,
+    this.onSelectedItemChanged,
+  });
 
   final List<int> valueList;
   final String unitText;
@@ -49,7 +55,17 @@ class _CustomCupertinoPickerState extends State<CustomCupertinoPicker> {
                   squeeze: 1.2,
                   useMagnifier: true,
                   onSelectedItemChanged: widget.onSelectedItemChanged,
-                  children: widget.valueList.map((item) => Center(child: Text('$item', style: const TextStyle(fontSize: 14)))).toList(),
+                  children:
+                      widget.valueList
+                          .map(
+                            (item) => Center(
+                              child: Text(
+                                '$item',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          )
+                          .toList(),
                 ),
               ),
 
@@ -61,7 +77,13 @@ class _CustomCupertinoPickerState extends State<CustomCupertinoPicker> {
                   widget.unitText,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w700, color: context.isDark ? CupertinoColors.white : CupertinoColors.black),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color:
+                        context.isDark
+                            ? CupertinoColors.white
+                            : CupertinoColors.black,
+                  ),
                 ),
               ),
             ],

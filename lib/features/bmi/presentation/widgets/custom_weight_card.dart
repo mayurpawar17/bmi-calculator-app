@@ -18,13 +18,22 @@ class CustomWeightCard extends StatelessWidget {
       builder: (context, bmi, _) {
         return BmiSectionCard(
           title: 'Weight',
-          switchWidget: UnitToggleSwitch(leftLabel: 'Kg', rightLabel: 'Lbs', isLeftActive: bmi.isKg, onLeftTap: bmi.weightToggle, onRightTap: bmi.weightToggle),
+          switchWidget: UnitToggleSwitch(
+            leftLabel: 'Kg',
+            rightLabel: 'Lbs',
+            isLeftActive: bmi.isKg,
+            onLeftTap: bmi.weightToggle,
+            onRightTap: bmi.weightToggle,
+          ),
           child: SizedBox(
             width: 150,
             child: CustomCupertinoPicker(
               valueList: bmi.isKg ? kgList : lbsList,
               unitText: bmi.isKg ? 'Kg' : 'Lbs',
-              initialValue: bmi.isKg ? kgList.indexOf(bmi.weightKg.toInt()) : lbsList.indexOf(bmi.lbs.toInt()),
+              initialValue:
+                  bmi.isKg
+                      ? kgList.indexOf(bmi.weightKg.toInt())
+                      : lbsList.indexOf(bmi.lbs.toInt()),
               onSelectedItemChanged: (i) {
                 bmi.setWeight((bmi.isKg ? kgList[i] : lbsList[i]).toDouble());
                 bmi.calculateBmi();

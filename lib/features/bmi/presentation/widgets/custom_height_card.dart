@@ -19,7 +19,13 @@ class CustomHeightCard extends StatelessWidget {
       builder: (context, bmi, _) {
         return BmiSectionCard(
           title: 'Height',
-          switchWidget: UnitToggleSwitch(leftLabel: 'Cm', rightLabel: 'Ft', isLeftActive: bmi.isCm, onLeftTap: bmi.heightToggle, onRightTap: bmi.heightToggle),
+          switchWidget: UnitToggleSwitch(
+            leftLabel: 'Cm',
+            rightLabel: 'Ft',
+            isLeftActive: bmi.isCm,
+            onLeftTap: bmi.heightToggle,
+            onRightTap: bmi.heightToggle,
+          ),
           child:
               bmi.isCm
                   ? Column(

@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/app_colors.dart';
 
 class BmiSectionCard extends StatelessWidget {
-  const BmiSectionCard({super.key, required this.title, required this.switchWidget, required this.child});
+  const BmiSectionCard({
+    super.key,
+    required this.title,
+    required this.switchWidget,
+    required this.child,
+  });
 
   final String title;
   final Widget switchWidget;
@@ -19,11 +24,17 @@ class BmiSectionCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: context.isDark ? AppColors.darkSecondaryColor : AppColors.lightSecondaryColor,
+        color:
+            context.isDark
+                ? AppColors.darkSecondaryColor
+                : AppColors.lightSecondaryColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: context.isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
+            color:
+                context.isDark
+                    ? Colors.white.withOpacity(0.05)
+                    : Colors.black.withOpacity(0.05),
             blurRadius: context.isDark ? 10 : 15,
             spreadRadius: context.isDark ? 0 : 2,
             offset: const Offset(0, 5),
@@ -36,7 +47,16 @@ class BmiSectionCard extends StatelessWidget {
           /// Title + Switch (same everywhere)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [Text(title, style: TextStyle(fontWeight: FontWeight.w700, color: context.isDark ? Colors.white : Colors.black)), switchWidget],
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: context.isDark ? Colors.white : Colors.black,
+                ),
+              ),
+              switchWidget,
+            ],
           ),
 
           /// Body

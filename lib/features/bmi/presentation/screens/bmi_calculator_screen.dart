@@ -18,7 +18,10 @@ class BmiCalculatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BMI FitIndex Pro", style: TextStyle(fontWeight: FontWeight.w600)),
+        title: Text(
+          "BMI FitIndex Pro",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
         actions: [
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
@@ -26,7 +29,10 @@ class BmiCalculatorScreen extends StatelessWidget {
                 icon: AnimatedCrossFade(
                   firstChild: Icon(Icons.dark_mode),
                   secondChild: Icon(Icons.sunny),
-                  crossFadeState: context.isDark ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                  crossFadeState:
+                      context.isDark
+                          ? CrossFadeState.showSecond
+                          : CrossFadeState.showFirst,
                   duration: Duration(milliseconds: 300),
                 ),
                 onPressed: () {
@@ -92,9 +98,16 @@ class BmiCalculatorScreen extends StatelessWidget {
                       HapticFeedback.selectionClick();
                       if (bmiProvider.selectedGender != null) {
                         bmiProvider.calculateBmi();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BmiResultScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BmiResultScreen(),
+                          ),
+                        );
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please select Gender!!!')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Please select Gender!!!')),
+                        );
                       }
                     },
                   );

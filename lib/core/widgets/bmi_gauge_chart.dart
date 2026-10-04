@@ -27,7 +27,15 @@ class BMIGaugeChart extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           /// Gauge background
-          PieChart(PieChartData(startDegreeOffset: 180, sectionsSpace: 0, centerSpaceRadius: 90, sections: _buildSections()), swapAnimationDuration: const Duration(milliseconds: 600)),
+          PieChart(
+            PieChartData(
+              startDegreeOffset: 180,
+              sectionsSpace: 0,
+              centerSpaceRadius: 90,
+              sections: _buildSections(),
+            ),
+            swapAnimationDuration: const Duration(milliseconds: 600),
+          ),
 
           /// Smooth animated needle
           TweenAnimationBuilder<double>(
@@ -37,14 +45,28 @@ class BMIGaugeChart extends StatelessWidget {
             builder: (context, angle, child) {
               return Transform.rotate(angle: angle, child: child);
             },
-            child: Icon(Icons.navigation, size: 36, color: AppColors.primaryColor),
+            child: Icon(
+              Icons.navigation,
+              size: 36,
+              color: AppColors.primaryColor,
+            ),
           ),
 
           /// BMI Value
           Positioned(
             bottom: 40,
             child: Column(
-              children: [Text(bmi.toStringAsFixed(1), style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: _getBMIColor(bmi))), const Text('kg/m²', style: TextStyle(fontSize: 14))],
+              children: [
+                Text(
+                  bmi.toStringAsFixed(1),
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: _getBMIColor(bmi),
+                  ),
+                ),
+                const Text('kg/m²', style: TextStyle(fontSize: 14)),
+              ],
             ),
           ),
         ],
@@ -53,11 +75,21 @@ class BMIGaugeChart extends StatelessWidget {
   }
 
   List<PieChartSectionData> _buildSections() {
-    return [_section(18.5 - 10, Colors.yellow.shade600), _section(24.9 - 18.5, Colors.green), _section(29.9 - 24.9, Colors.orange), _section(40 - 29.9, Colors.red)];
+    return [
+      _section(18.5 - 10, Colors.yellow.shade600),
+      _section(24.9 - 18.5, Colors.green),
+      _section(29.9 - 24.9, Colors.orange),
+      _section(40 - 29.9, Colors.red),
+    ];
   }
 
   PieChartSectionData _section(double value, Color color) {
-    return PieChartSectionData(value: value, color: color, radius: 18, showTitle: false);
+    return PieChartSectionData(
+      value: value,
+      color: color,
+      radius: 18,
+      showTitle: false,
+    );
   }
 
   Color _getBMIColor(double bmi) {

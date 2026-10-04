@@ -117,7 +117,7 @@ class BmiProvider extends ChangeNotifier {
   // ===== BMI Calculation =====
   void calculateBmi() {
     double height =
-    _heightUnit == HeightUnit.ft ? ftToCm(_feet, _inches) : _heightCm;
+        _heightUnit == HeightUnit.ft ? ftToCm(_feet, _inches) : _heightCm;
     // double weight = _weightUnit == WeightUnit.kg ? lbsToKg(_lbs) : _weightKg;
     // notifyListeners();
     double weight = _weightUnit == WeightUnit.kg ? _weightKg : lbsToKg(_lbs);

@@ -23,7 +23,14 @@ class CustomSlider extends StatelessWidget {
         valueIndicatorTextStyle: const TextStyle(fontSize: 14),
         showValueIndicator: ShowValueIndicator.always,
       ),
-      child: Slider(value: value, min: 100, max: 220, divisions: 120, label: "${value.toStringAsFixed(0)} cm", onChanged: onChanged),
+      child: Slider(
+        value: value,
+        min: 100,
+        max: 220,
+        divisions: 120,
+        label: "${value.toStringAsFixed(0)} cm",
+        onChanged: onChanged,
+      ),
     );
   }
 }
