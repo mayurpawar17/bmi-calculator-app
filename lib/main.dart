@@ -7,6 +7,7 @@ import 'features/theme/presentation/app_themes.dart';
 import 'features/theme/provider/theme_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
