@@ -2,6 +2,7 @@
 
 BMI FitIndex Pro is a sleek and powerful Flutter app designed to help users monitor their **Body Mass Index (BMI)** and track their fitness journey with ease. Whether you're a beginner or a fitness enthusiast, this app provides instant feedback on your health index based on your height and weight inputs.
 
+Play store Published app branch name : provider-bmi-calculator
 ---
 
 ## 🚀 Features
